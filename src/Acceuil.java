@@ -30,15 +30,15 @@ public class Acceuil extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JMenuBar menuBar = new JMenuBar();
-	private final JMenu fichierMenu = new JMenu();
-	private final JMenuItem ouvrirMenu = new JMenuItem();
-	private final JMenuItem enregistrerMenu = new JMenuItem();
-	private final JMenuItem quitterMenu = new JMenuItem();
+	private final JMenu fileMenu = new JMenu();
+	private final JMenuItem openMenu = new JMenuItem();
+	private final JMenuItem saveMenu = new JMenuItem();
+	private final JMenuItem quitMenu = new JMenuItem();
 	
-	private final JMenu     EditionMenu = new JMenu();
-	private final JMenuItem RetourMenu = new JMenuItem();
-	private final JMenuItem agrandirMenu = new JMenuItem();
-	private final JMenuItem reduireMenu = new JMenuItem();
+	private final JMenu     EditMenu = new JMenu();
+	private final JMenuItem ReturnMenu = new JMenuItem();
+	private final JMenuItem enlargeMenu = new JMenuItem();
+	private final JMenuItem reduceMenu = new JMenuItem();
 	
 	private final JMenu imageMenu = new JMenu();
 	private final JMenuItem histogrammeMenu = new JMenuItem();
@@ -101,47 +101,47 @@ public class Acceuil extends JFrame implements ActionListener {
 
 		// construction du menu
 		setJMenuBar(menuBar);	
-		menuBar.add(fichierMenu);
-		fichierMenu.setText("Fichier");
-		fichierMenu.add(ouvrirMenu);
-		ouvrirMenu.addActionListener((ActionListener)this);
-		ouvrirMenu.setText("Ouvrir");
-		fichierMenu.addSeparator();
+		menuBar.add(fileMenu);
+		fileMenu.setText("Fichier");
+		fileMenu.add(openMenu);
+		openMenu.addActionListener((ActionListener)this);
+		openMenu.setText("Ouvrir");
+		fileMenu.addSeparator();
 
-		fichierMenu.add(enregistrerMenu);
-		enregistrerMenu.addActionListener((ActionListener)this);
-		enregistrerMenu.setText("Enregistrer Sous");
-		fichierMenu.addSeparator();
+		fileMenu.add(saveMenu);
+		saveMenu.addActionListener((ActionListener)this);
+		saveMenu.setText("Enregistrer Sous");
+		fileMenu.addSeparator();
 		
-		fichierMenu.add(quitterMenu);
-		quitterMenu.addActionListener(new ActionListener() {
+		fileMenu.add(quitMenu);
+		quitMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				quitter();
 				
 			}
 		});
-		quitterMenu.setText("Quitter");
+		quitMenu.setText("Quitter");
 		
-		menuBar.add(EditionMenu);
-		EditionMenu.setText("Edition");
-		EditionMenu.add(RetourMenu);
-		RetourMenu.setText("Retour");
-		RetourMenu.addActionListener(new ActionListener() {
+		menuBar.add(EditMenu);
+		EditMenu.setText("Edition");
+		EditMenu.add(ReturnMenu);
+		ReturnMenu.setText("Retour");
+		ReturnMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				panneau.Retour();
 			}
 		});
-		EditionMenu.addSeparator();
+		EditMenu.addSeparator();
 		
-		EditionMenu.add(agrandirMenu);
-		agrandirMenu.addActionListener((ActionListener)this);
-		agrandirMenu.setText("Agrandir");
-		EditionMenu.add(reduireMenu);
-		reduireMenu.addActionListener((ActionListener)this);
-		reduireMenu.setText("Réduire");
+		EditMenu.add(enlargeMenu);
+		enlargeMenu.addActionListener((ActionListener)this);
+		enlargeMenu.setText("Agrandir");
+		EditMenu.add(reduceMenu);
+		reduceMenu.addActionListener((ActionListener)this);
+		reduceMenu.setText("Réduire");
 		imageMenu.addSeparator();
 		
 		menuBar.add(imageMenu);
@@ -316,8 +316,8 @@ public class Acceuil extends JFrame implements ActionListener {
 		
 	}  
 	private  void  desactiveMenu(){
-		enregistrerMenu.setEnabled(false);
-		RetourMenu.setEnabled(false);
+		saveMenu.setEnabled(false);
+		ReturnMenu.setEnabled(false);
 		histogrammeMenu.setEnabled(false);
 	    ConversionMenu .setEnabled(false);
 		etirertMenu.setEnabled(false);
@@ -335,14 +335,14 @@ public class Acceuil extends JFrame implements ActionListener {
 		 brillanceMenu.setEnabled(false);
 		binarisationMenu.setEnabled(false);
 		
-		 agrandirMenu.setEnabled(false);
-		 reduireMenu.setEnabled(false);
+		 enlargeMenu.setEnabled(false);
+		 reduceMenu.setEnabled(false);
 		
 		
 	}
 	private  void  activeMenu(){
-		enregistrerMenu.setEnabled(true);
-		RetourMenu.setEnabled(true);
+		saveMenu.setEnabled(true);
+		ReturnMenu.setEnabled(true);
 		histogrammeMenu.setEnabled(true);
 	    ConversionMenu .setEnabled(true);
 		etirertMenu.setEnabled(true);
@@ -360,14 +360,14 @@ public class Acceuil extends JFrame implements ActionListener {
 		 brillanceMenu.setEnabled(true);
 		binarisationMenu.setEnabled(true);
 		
-		 agrandirMenu.setEnabled(true);
-		 reduireMenu.setEnabled(true);
+		 enlargeMenu.setEnabled(true);
+		 reduceMenu.setEnabled(true);
 		
 		
 	}
 	
 	public void actionPerformed(ActionEvent cliqueMenu) {
-		if (cliqueMenu.getSource().equals(ouvrirMenu))
+		if (cliqueMenu.getSource().equals(openMenu))
 		{
 			JFileChooser fileOuvrirImage = new JFileChooser();
 			fileOuvrirImage.setAcceptAllFileFilterUsed(false);
@@ -386,7 +386,7 @@ public class Acceuil extends JFrame implements ActionListener {
 				
 				
 			}
-		} else if (cliqueMenu.getSource().equals(enregistrerMenu)) {
+		} else if (cliqueMenu.getSource().equals(saveMenu)) {
 			JFileChooser fileEnregistrerImage = new JFileChooser();
 			if (fileEnregistrerImage.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 				File fichierEnregistrement = new File(fileEnregistrerImage.getSelectedFile().getAbsolutePath()+ ".JPG");
@@ -401,9 +401,9 @@ public class Acceuil extends JFrame implements ActionListener {
 				panneau.imageEclaircie();
 			} else if (cliqueMenu.getSource().equals(binarisationMenu)) {
 				panneau.imageBinaire();
-			}  else if (cliqueMenu.getSource().equals(agrandirMenu)) {
+			}  else if (cliqueMenu.getSource().equals(enlargeMenu)) {
 				panneau.agrandirImage();
-			} else if (cliqueMenu.getSource().equals(reduireMenu)) {
+			} else if (cliqueMenu.getSource().equals(reduceMenu)) {
 				panneau.reduireImage();
 			}else if(cliqueMenu.getSource().equals(assombrirMenu)){
 				panneau.imageSombre();	
