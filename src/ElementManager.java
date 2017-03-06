@@ -2,15 +2,16 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Elements;
 
 public class ElementManager {
 	
 	private List<DrawableElements> elements ;
-	private long idCurrentPoint;  
+	private long idCurrentPoint;
+	private CavenasListener listener;
 	
 	public ElementManager(){
 		this.elements = new ArrayList<>();
+		this.listener = listener;
 	}
 	
 	/**
@@ -41,7 +42,7 @@ public class ElementManager {
 	}
 	
 	/**
-	 * Mise à jour des id des éléments contenus dans la scene
+	 * Mise à jour des id des éléments contenu dans la scene
 	 * 
 	 */
 	public void updateID(){
@@ -94,6 +95,12 @@ public class ElementManager {
 		for(DrawableElements current : this.elements){
 			current.draw(g,canevas);
 		}		
+	}
+
+	public void importImages() {
+		System.out.println("Dans ElementManager ok");
+		ImageElement img = new ImageElement();
+		
 	}
 
 }

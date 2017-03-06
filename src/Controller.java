@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 
-import Model.Elements;
 
 
 
 public class Controller implements ApplicationListener{
 	
 	private static Acceuil ui;
-	private Elements elements;
+	private ElementManager manager;
 	private int selectedId;
 	private int selectedIdIndex;
 	private static ArrayList<byte[]> maByteArray = new ArrayList<byte[]>();
@@ -16,6 +15,7 @@ public class Controller implements ApplicationListener{
 	public Controller (Acceuil ui){
 		Controller.ui = ui;
 		Controller.ui.addListener(this);
+		this.manager = new ElementManager();
 		this.selectedId = -1;
 		this.selectedIdIndex = -1;
 		
@@ -295,7 +295,8 @@ public class Controller implements ApplicationListener{
 
 	@Override
 	public void onImport() {
-		ui.importImages(elements.addImages());
+		System.out.println("Dans controller ok");
+		manager.importImages();
 		
 	}
 

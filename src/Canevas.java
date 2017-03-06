@@ -19,9 +19,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent; 
 import java.awt.event.MouseListener; 
 import java.awt.event.MouseMotionListener; 
-import javax.swing.JPanel;
-
-import Model.imagesElements; 
+import javax.swing.JPanel; 
 
 public class Canevas extends JPanel implements MouseListener, MouseMotionListener{
 
@@ -31,7 +29,7 @@ public class Canevas extends JPanel implements MouseListener, MouseMotionListene
 	private ElementManager manager;  //gestionnaire d'objets 
 	private float posXLast, posYLast; // ppoint précédent
 	private float posXCurrent, posYCurrent; // point de départ
-	
+	private CavenasListener listener;
 	private int mode ; // VIEW - DRAG OR SCALE 
 	private double scales; //échelles
 	private static double SCALES_BASE = 100;  // échelle de base 
@@ -52,7 +50,7 @@ public class Canevas extends JPanel implements MouseListener, MouseMotionListene
 		this.offsetY = 0;
 		this.scales = SCALES_BASE;
 		
-		this.addMouseListener(this);;
+		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
 	}
 
@@ -262,7 +260,7 @@ public class Canevas extends JPanel implements MouseListener, MouseMotionListene
 		
 	}
 
-	public void addElements(int id, imagesElements imagesElements) {
+	public void addElements() {
 		// TODO Auto-generated method stub
 		
 	}
