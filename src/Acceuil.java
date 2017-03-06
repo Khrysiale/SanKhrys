@@ -32,7 +32,11 @@ public class Acceuil extends JFrame implements ActionListener {
 	private final JMenuBar menuBar = new JMenuBar();
 	private final JMenu fileMenu = new JMenu();
 	private final JMenuItem openMenu = new JMenuItem();
+	private final JMenuItem newFileMenu = new JMenuItem();
+	private final JMenuItem importMenu = new JMenuItem();
+	private final JMenuItem exportMenu = new JMenuItem();
 	private final JMenuItem saveMenu = new JMenuItem();
+	private final JMenuItem saveAsMenu = new JMenuItem();
 	private final JMenuItem quitMenu = new JMenuItem();
 	
 	private final JMenu     EditMenu = new JMenu();
@@ -104,13 +108,25 @@ public class Acceuil extends JFrame implements ActionListener {
 		menuBar.add(fileMenu);
 		fileMenu.setText("Fichier");
 		fileMenu.add(openMenu);
+		fileMenu.add(newFileMenu);
+		fileMenu.add(importMenu);
+		fileMenu.add(exportMenu);	
+		newFileMenu.addActionListener((ActionListener)this);
+		newFileMenu.setText("Nouveau");
 		openMenu.addActionListener((ActionListener)this);
 		openMenu.setText("Ouvrir");
+		importMenu.addActionListener((ActionListener)this);
+		importMenu.setText("Importer");
+		exportMenu.addActionListener((ActionListener)this);
+		exportMenu.setText("Exporter");
+		
 		fileMenu.addSeparator();
 
 		fileMenu.add(saveMenu);
+		fileMenu.add(saveAsMenu);
 		saveMenu.addActionListener((ActionListener)this);
-		saveMenu.setText("Enregistrer Sous");
+		saveMenu.setText("Enregistrer");
+		saveAsMenu.setText("Enregistrer Sous");
 		fileMenu.addSeparator();
 		
 		fileMenu.add(quitMenu);
