@@ -67,7 +67,7 @@ public class PanelImage extends JPanel {
 		repaint();
 	}
 
-	protected void filtreMoyenneur()
+	protected void filterMoyenneur()
 	{
 		BufferedImage image = new BufferedImage(monImage.getWidth(),monImage.getHeight(), monImage.getType());
 		float[ ] masqueMedian = 
@@ -85,7 +85,7 @@ public class PanelImage extends JPanel {
 		repaint();
 
 	}
-	protected void filtreMedian()
+	protected void filterMedian()
 	{
 		BufferedImage image = new BufferedImage(monImage.getWidth(),monImage.getHeight(), monImage.getType());
 		float[ ] masqueMedian = 
@@ -103,7 +103,7 @@ public class PanelImage extends JPanel {
 		repaint();
 
 	}
-	protected void filtreGaussian()
+	protected void filterGaussian()
 	{
 		BufferedImage image = new BufferedImage(monImage.getWidth(),monImage.getHeight(), monImage.getType());
 		float[ ] masqueMedian = 
@@ -121,7 +121,7 @@ public class PanelImage extends JPanel {
 		repaint();
 
 	}
-	protected void filtreSobbel()
+	protected void filterSobbel()
 	{
 		BufferedImage imageX = new BufferedImage(monImage.getWidth(),monImage.getHeight(), monImage.getType());
 		float[ ] masqueSoblX = 
@@ -152,7 +152,7 @@ public class PanelImage extends JPanel {
 		repaint();
 
 	}
-	protected void filtrePrwitt()
+	protected void filterPrwitt()
 	{
 	
 
@@ -294,7 +294,7 @@ pixel[i][j]=g;
 
 	}
 
-	protected void filtreLaplacien()
+	protected void filterLaplacien()
 	{
 		try {
 			

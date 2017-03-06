@@ -43,18 +43,18 @@ public class Acceuil extends JFrame implements ActionListener {
 	private final JMenu imageMenu = new JMenu();
 	private final JMenuItem histogrammeMenu = new JMenuItem();
 	private final JMenuItem ConversionMenu = new JMenuItem();
-	private final JMenuItem  etirertMenu = new JMenuItem();
-	private final JMenuItem  egaliserMenu = new JMenuItem();
+	private final JMenuItem  stretchMenu = new JMenuItem();
+	private final JMenuItem  equalizeMenu = new JMenuItem();
 	
-	private final JMenu filtreMenu = new JMenu();
+	private final JMenu filterMenu = new JMenu();
 	
-	private final JMenuItem filtremoyenneurMenu = new JMenuItem();
-	private final JMenuItem filtremedianMenu = new JMenuItem();
-	private final JMenuItem filtregaussienMenu = new JMenuItem();
-	private final JMenuItem filtreCannytMenu = new JMenuItem();
-	private final JMenuItem filtreSobelMenu = new JMenuItem();
-	private final JMenuItem filtrelaplacienMenu = new JMenuItem();
-	private final JMenuItem filtrepriwittMenu = new JMenuItem();
+	private final JMenuItem filtermoyenneurMenu = new JMenuItem();
+	private final JMenuItem filtermedianMenu = new JMenuItem();
+	private final JMenuItem filtergaussienMenu = new JMenuItem();
+	private final JMenuItem filterCannytMenu = new JMenuItem();
+	private final JMenuItem filterSobelMenu = new JMenuItem();
+	private final JMenuItem filterlaplacienMenu = new JMenuItem();
+	private final JMenuItem filterpriwittMenu = new JMenuItem();
 
 	private final JMenu traitementMenu = new JMenu();
 	private final JMenuItem niveauGrisMenu = new JMenuItem();
@@ -180,38 +180,38 @@ public class Acceuil extends JFrame implements ActionListener {
 		});
 		imageMenu.addSeparator();
 		
-		imageMenu.add(etirertMenu);
-		etirertMenu.setText("Etirer");
+		imageMenu.add(stretchMenu);
+		stretchMenu.setText("Etirer");
 		imageMenu.addSeparator();
 	    
-		imageMenu.add(egaliserMenu);
-		egaliserMenu.addActionListener(new ActionListener() {
+		imageMenu.add(equalizeMenu);
+		equalizeMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
 			}
 		});
-		egaliserMenu.setText("Egaliser");
+		equalizeMenu.setText("Egaliser");
 		
-		menuBar.add(filtreMenu);	
-		filtreMenu.setText("Filtre");
+		menuBar.add(filterMenu);	
+		filterMenu.setText("Filtre");
 		
-		filtreMenu.add(filtremoyenneurMenu);
-		filtremoyenneurMenu.setText("Filtre Moyenneur");
-		filtremoyenneurMenu.addActionListener(new ActionListener() {
+		filterMenu.add(filtermoyenneurMenu);
+		filtermoyenneurMenu.setText("Filtre Moyenneur");
+		filtermoyenneurMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-			panneau.filtreMoyenneur();
+			panneau.filterMoyenneur();
 			}
 		});
 		
 		
 
-		filtreMenu.add(filtregaussienMenu);
-		filtregaussienMenu.setText("Filtre Gaussien");
-		filtremedianMenu.addActionListener(new ActionListener() {
+		filterMenu.add(filtergaussienMenu);
+		filtergaussienMenu.setText("Filtre Gaussien");
+		filtermedianMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -221,55 +221,55 @@ public class Acceuil extends JFrame implements ActionListener {
 	
 		
 		
-		filtreMenu.add(filtremedianMenu);
-		filtremedianMenu.setText("Filtre Médian");
-		filtremedianMenu.addActionListener(new ActionListener() {
+		filterMenu.add(filtermedianMenu);
+		filtermedianMenu.setText("Filtre Médian");
+		filtermedianMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-			//panneau.filtreMoyenneur();
+			//panneau.filterMoyenneur();
 			}
 		});
-		filtreMenu.addSeparator();
+		filterMenu.addSeparator();
 		
 		
-		filtreMenu.add(filtreSobelMenu);
-		filtreSobelMenu.setText("Filtre Sobel");
-		filtreSobelMenu.addActionListener(new ActionListener() {
+		filterMenu.add(filterSobelMenu);
+		filterSobelMenu.setText("Filtre Sobel");
+		filterSobelMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-			panneau.filtreSobbel();
+			panneau.filterSobbel();
 			}
 		});
 		
 		
-		filtreMenu.add(filtrepriwittMenu);
-		filtrepriwittMenu.setText("Filtre Priwitt");
-		filtrepriwittMenu.addActionListener(new ActionListener() {
+		filterMenu.add(filterpriwittMenu);
+		filterpriwittMenu.setText("Filtre Priwitt");
+		filterpriwittMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-			panneau.filtrePrwitt();
-			}
-		});
-	
-		
-		filtreMenu.add(filtrelaplacienMenu);
-		filtrelaplacienMenu.setText("Filtre Laplacien");
-		filtrelaplacienMenu.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-			panneau.filtreLaplacien();
+			panneau.filterPrwitt();
 			}
 		});
 	
 		
+		filterMenu.add(filterlaplacienMenu);
+		filterlaplacienMenu.setText("Filtre Laplacien");
+		filterlaplacienMenu.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+			panneau.filterLaplacien();
+			}
+		});
+	
 		
-		filtreMenu.add(filtreCannytMenu);
-		filtreCannytMenu.setText("Filtre Canny");
-		filtreCannytMenu.addActionListener(new ActionListener() {
+		
+		filterMenu.add(filterCannytMenu);
+		filterCannytMenu.setText("Filtre Canny");
+		filterCannytMenu.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -320,15 +320,15 @@ public class Acceuil extends JFrame implements ActionListener {
 		ReturnMenu.setEnabled(false);
 		histogrammeMenu.setEnabled(false);
 	    ConversionMenu .setEnabled(false);
-		etirertMenu.setEnabled(false);
-	    egaliserMenu.setEnabled(false);
-	    filtremoyenneurMenu.setEnabled(false);
-		filtremedianMenu.setEnabled(false);
-	    filtregaussienMenu.setEnabled(false);
-		filtreCannytMenu.setEnabled(false);
-		 filtreSobelMenu.setEnabled(false);
-		filtrelaplacienMenu.setEnabled(false);
-	    filtrepriwittMenu.setEnabled(false);
+		stretchMenu.setEnabled(false);
+	    equalizeMenu.setEnabled(false);
+	    filtermoyenneurMenu.setEnabled(false);
+		filtermedianMenu.setEnabled(false);
+	    filtergaussienMenu.setEnabled(false);
+		filterCannytMenu.setEnabled(false);
+		 filterSobelMenu.setEnabled(false);
+		filterlaplacienMenu.setEnabled(false);
+	    filterpriwittMenu.setEnabled(false);
 
 	    niveauGrisMenu.setEnabled(false);
 		assombrirMenu.setEnabled(false);
@@ -345,15 +345,15 @@ public class Acceuil extends JFrame implements ActionListener {
 		ReturnMenu.setEnabled(true);
 		histogrammeMenu.setEnabled(true);
 	    ConversionMenu .setEnabled(true);
-		etirertMenu.setEnabled(true);
-	    egaliserMenu.setEnabled(true);
-	    filtremoyenneurMenu.setEnabled(true);
-		filtremedianMenu.setEnabled(true);
-	    filtregaussienMenu.setEnabled(true);
-		filtreCannytMenu.setEnabled(true);
-		filtreSobelMenu.setEnabled(true);
-		filtrelaplacienMenu.setEnabled(true);
-	    filtrepriwittMenu.setEnabled(true);
+		stretchMenu.setEnabled(true);
+	    equalizeMenu.setEnabled(true);
+	    filtermoyenneurMenu.setEnabled(true);
+		filtermedianMenu.setEnabled(true);
+	    filtergaussienMenu.setEnabled(true);
+		filterCannytMenu.setEnabled(true);
+		filterSobelMenu.setEnabled(true);
+		filterlaplacienMenu.setEnabled(true);
+	    filterpriwittMenu.setEnabled(true);
 
 	    niveauGrisMenu.setEnabled(true);
 		assombrirMenu.setEnabled(true);
