@@ -341,24 +341,18 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(openMenu))	{
 			listener.onOpenMenu();
-
 		}else if(e.getSource().equals(newFileMenu)){
-			listener.onNewFileMenu();
-			
+			listener.onNewFileMenu();			
 		}else if(e.getSource().equals(saveMenu )){
-			listener.onSaveMenu();
-			
+			listener.onSaveMenu();			
 		}else if(e.getSource().equals(saveAsMenu)){
 			listener.onSaveAsMenu();
 		}else if(e.getSource().equals(quitMenu)){
-			listener.onQuitMenu();
-			
+			listener.onQuitMenu();			
 		}else if(e.getSource().equals(undoMenu)){
-			listener.onUndoMenu();
-			
+			listener.onUndoMenu();			
 		}else if(e.getSource().equals(redoMenu)){
-			listener.onRedoMenu();
-			
+			listener.onRedoMenu();			
 		}else if(e.getSource().equals(enlargeMenu)){
 			listener.onEnlage();
 		}else if(e.getSource().equals(reduceMenu)){
