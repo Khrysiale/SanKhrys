@@ -1,3 +1,9 @@
+/**
+ * @author Sandra
+ * @param 
+ *
+ * precondtion: 
+ */
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,58 +21,58 @@ import javax.swing.JPanel;
 
 public class Image extends JPanel  {
 
-	BufferedImage img = null;
+	BufferedImage myImage = null;
 
 	public Image() {
 		super();
-
 	}
 
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		if(img != null)
-			g.drawImage(img, 0, 0, null);
+		if(myImage != null)
+			g.drawImage(myImage, 0, 0, null);
 	}
 
 
 	protected void reduireImage()
 	{
-		BufferedImage imageReduite = new BufferedImage((int)(img.getWidth()*0.5),(int)( img.getHeight()*0.5), img.getType());
+		BufferedImage imageReduite = new BufferedImage((int)(myImage.getWidth()*0.5),(int)( myImage.getHeight()*0.5), myImage.getType());
 		AffineTransform reduire = AffineTransform.getScaleInstance(0.5, 0.5);
 		int interpolation = AffineTransformOp.TYPE_BICUBIC;
 		AffineTransformOp retaillerImage = new AffineTransformOp(reduire, interpolation);
-		retaillerImage.filter(img, imageReduite );
-		img = imageReduite ;
+		retaillerImage.filter(myImage, imageReduite );
+		myImage = imageReduite ;
 		repaint();
 	}
 
 
 	protected void agrandirImage()
 	{
-		BufferedImage imageZoomer = new BufferedImage((int)(img.getWidth()*1.5),(int)( img.getHeight()*1.5), img.getType());
+		BufferedImage imageZoomer = new BufferedImage((int)(myImage.getWidth()*1.5),(int)( myImage.getHeight()*1.5), myImage.getType());
 		AffineTransform agrandir = AffineTransform.getScaleInstance(1.5, 1.5);
 		int interpolation = AffineTransformOp.TYPE_BICUBIC;
 		AffineTransformOp retaillerImage = new AffineTransformOp(agrandir, interpolation);
-		retaillerImage.filter(img, imageZoomer );
-		img = imageZoomer ;
+		retaillerImage.filter(myImage, imageZoomer );
+		myImage = imageZoomer ;
 		repaint();
 	}
 
-	protected void imageConvolue()//on va utiliser le masque flou 
+	//rend une image flou 
+	protected void imgFilter()
 	{
-		BufferedImage imageFlou = new BufferedImage(img.getWidth(),img.getHeight(), img.getType());
-		float[ ] masqueFlou = 
+		BufferedImage imgFlou = new BufferedImage(myImage.getWidth(),myImage.getHeight(), myImage.getType());
+		float[ ] maskFlou = 
 		{
 				0.1f, 0.1f, 0.1f,
 				0.1f, 0.2f, 0.1f,
 				0.1f, 0.1f, 0.1f
 		};
 
-		Kernel masque = new Kernel(3, 3, masqueFlou);
-		ConvolveOp opération = new ConvolveOp(masque);
-		opération.filter(img, imageFlou);
-		img = imageFlou;
+		Kernel mask = new Kernel(3, 3, maskFlou);
+		ConvolveOp operation = new ConvolveOp(mask);
+		operation.filter(myImage, imgFlou);
+		myImage = imgFlou;
 		System.out.println("convolution effectuée");
 		repaint();
 
@@ -80,10 +86,10 @@ public class Image extends JPanel  {
    			  2.  A > 1, l’image devient  plus brillante.
    			  3. K est compris entre 0 et 256 et ajoute un éclairement .
 		 */
-		BufferedImage imgBrillant = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage myImageBrillant = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_INT_RGB);
 		RescaleOp brillance = new RescaleOp(1.2f, 0, null);
-		brillance.filter(img, imgBrillant);
-		img = imgBrillant;
+		brillance.filter(myImage, myImageBrillant);
+		myImage = myImageBrillant;
 		repaint();
 
 
@@ -98,36 +104,36 @@ public class Image extends JPanel  {
    			  3.  K est compris entre 0 et 256 et ajoute un éclairement .
 		 *    
 		 */		
-		BufferedImage imgSombre = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage myImageSombre = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_INT_RGB);
 		RescaleOp assombrir = new RescaleOp(0.7f, 10, null);
-		assombrir.filter(img, imgSombre);
-		img = imgSombre;
+		assombrir.filter(myImage, myImageSombre);
+		myImage = myImageSombre;
 		System.out.println("assombrir effectuée");
 		repaint();
 	}
 
 	protected void imageBinaire()
 	{   
-		BufferedImage imgBinaire = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
-		Graphics2D surfaceImg = imgBinaire.createGraphics();
-		surfaceImg.drawImage(img, null, null);   
-		img = imgBinaire;
+		BufferedImage myImageBinaire = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+		Graphics2D surfacemyImage = myImageBinaire.createGraphics();
+		surfacemyImage.drawImage(myImage, null, null);   
+		myImage = myImageBinaire;
 		repaint();
 	}
 
 	protected void imageEnNiveauGris()
 	{
-		BufferedImage imageGris = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_USHORT_GRAY);
-		Graphics2D surfaceImg = imageGris.createGraphics();
-		surfaceImg.drawImage(img, null, null);	      
-		img = imageGris;
+		BufferedImage imageGris = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_USHORT_GRAY);
+		Graphics2D surfacemyImage = imageGris.createGraphics();
+		surfacemyImage.drawImage(myImage, null, null);	      
+		myImage = imageGris;
 		repaint(); 
 	}
 
 	protected void ajouterImage(File fichierImage)
 	{   // desiiner une image à l'ecran	
 		try {
-			img = ImageIO.read(fichierImage);
+			myImage = ImageIO.read(fichierImage);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
