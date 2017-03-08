@@ -5,6 +5,7 @@
  * precondtion: 
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -21,7 +22,7 @@ import javax.swing.JPanel;
 
 public class Image extends JPanel  {
 
-	BufferedImage myImage = null;
+	BufferedImage imgSrc = null;
 
 	public Image() {
 		super();
@@ -30,137 +31,178 @@ public class Image extends JPanel  {
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		if(myImage != null)
-			g.drawImage(myImage, 0, 0, null);
+		if(imgSrc != null)
+			g.drawImage(imgSrc, 0, 0, null);
 	}
 
+	protected void colorSpace(){
+		int red = 255;
+		int blue = 0;
+		int green = 0;
+		 
+		float[] hsbValues = new float[3];
+		 
+		// conversion
+		Color.RGBtoHSB(red, green, blue, hsbValues);
+		 
+		// Voici comment construire un objet Color en HSB
+		Color hsbColor = Color.getHSBColor(hsbValues[0], hsbValues[1], hsbValues[2]);
+		 
+		// On teste que les deux objets décrivent la meme couleur
+		//System.out.println(rgbColor);
+		//System.out.println(hsbColor);
+		 
+		//if(rgbColor.equals(hsbColor))
+		  //System.out.println("Les couleurs sont les mêmes");
+		
+	}
+	 
+	
 
-	protected void reduireImage()
+	/*protected void reduireImage()
 	{
-		BufferedImage imageReduite = new BufferedImage((int)(myImage.getWidth()*0.5),(int)( myImage.getHeight()*0.5), myImage.getType());
+		BufferedImage imageReduite = new BufferedImage((int)(imgSrc.getWidth()*0.5),(int)( imgSrc.getHeight()*0.5), imgSrc.getType());
 		AffineTransform reduire = AffineTransform.getScaleInstance(0.5, 0.5);
 		int interpolation = AffineTransformOp.TYPE_BICUBIC;
 		AffineTransformOp retaillerImage = new AffineTransformOp(reduire, interpolation);
-		retaillerImage.filter(myImage, imageReduite );
-		myImage = imageReduite ;
+		retaillerImage.filter(imgSrc, imageReduite );
+		imgSrc = imageReduite ;
 		repaint();
-	}
+	}*/
 
 
-	protected void agrandirImage()
+	/*protected void agrandirImage()
 	{
-		BufferedImage imageZoomer = new BufferedImage((int)(myImage.getWidth()*1.5),(int)( myImage.getHeight()*1.5), myImage.getType());
+		BufferedImage imageZoomer = new BufferedImage((int)(imgSrc.getWidth()*1.5),(int)( imgSrc.getHeight()*1.5), imgSrc.getType());
 		AffineTransform agrandir = AffineTransform.getScaleInstance(1.5, 1.5);
 		int interpolation = AffineTransformOp.TYPE_BICUBIC;
 		AffineTransformOp retaillerImage = new AffineTransformOp(agrandir, interpolation);
-		retaillerImage.filter(myImage, imageZoomer );
-		myImage = imageZoomer ;
+		retaillerImage.filter(imgSrc, imageZoomer );
+		imgSrc = imageZoomer ;
 		repaint();
-	}
+	}*/
 
 	//rend une image flou 
-	protected void imgFilter()
+	protected void filterImage()
 	{
-		BufferedImage imgFlou = new BufferedImage(myImage.getWidth(),myImage.getHeight(), myImage.getType());
-		float[ ] maskFlou = 
+		BufferedImage imgBlurry = new BufferedImage(imgSrc.getWidth(),imgSrc.getHeight(), imgSrc.getType());
+		float[ ] maskBlurry = 
 		{
 				0.1f, 0.1f, 0.1f,
 				0.1f, 0.2f, 0.1f,
 				0.1f, 0.1f, 0.1f
 		};
 
-		Kernel mask = new Kernel(3, 3, maskFlou);
+		Kernel mask = new Kernel(3, 3, maskBlurry);
 		ConvolveOp operation = new ConvolveOp(mask);
-		operation.filter(myImage, imgFlou);
-		myImage = imgFlou;
-		System.out.println("convolution effectuée");
+		operation.filter(imgSrc, imgBlurry);
+		imgSrc = imgBlurry;
+		//System.out.println("convolution effectuee");
 		repaint();
 
 	}
 
-	protected void imageEclaircie()
+
+	/*
+	 *    RescaleOp brillance = new RescaleOp(A, K, null);
+	 *    1.  A< 1, l’image devient plus sombre.
+			  2.  A > 1, l’image devient  plus brillante.
+			  3. K est compris entre 0 et 256 et ajoute un éclairement .
+	 */
+	
+	/*protected void imageEclaircie()
 	{
-		/*
-		 *    RescaleOp brillance = new RescaleOp(A, K, null);
-		 *    1.  A< 1, l’image devient plus sombre.
-   			  2.  A > 1, l’image devient  plus brillante.
-   			  3. K est compris entre 0 et 256 et ajoute un éclairement .
-		 */
-		BufferedImage myImageBrillant = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage imgSrcBrillant = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_INT_RGB);
 		RescaleOp brillance = new RescaleOp(1.2f, 0, null);
-		brillance.filter(myImage, myImageBrillant);
-		myImage = myImageBrillant;
+		brillance.filter(imgSrc, imgSrcBrillant);
+		imgSrc = imgSrcBrillant;
 		repaint();
+	}*/
 
-
-	}
-
-	protected void imageSombre()
-	{
+	
 		/* RescaleOp assombrir = new RescaleOp(A, K, null);
 		 *    
 		 *    1.  A < 1, l’image devient plus sombre.
-   			  2.  A > 1, l’image devient  plus brillante.
-   			  3.  K est compris entre 0 et 256 et ajoute un éclairement .
+				  2.  A > 1, l’image devient  plus brillante.
+				  3.  K est compris entre 0 et 256 et ajoute un éclairement .
 		 *    
 		 */		
-		BufferedImage myImageSombre = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+	/*protected void imageSombre()
+	{
+		
+		BufferedImage imgSrcSombre = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_INT_RGB);
 		RescaleOp assombrir = new RescaleOp(0.7f, 10, null);
-		assombrir.filter(myImage, myImageSombre);
-		myImage = myImageSombre;
+		assombrir.filter(imgSrc, imgSrcSombre);
+		imgSrc = imgSrcSombre;
 		System.out.println("assombrir effectuée");
 		repaint();
-	}
+	}*/
 
-	protected void imageBinaire()
+	/*protected void imageBinaire()
 	{   
-		BufferedImage myImageBinaire = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
-		Graphics2D surfacemyImage = myImageBinaire.createGraphics();
-		surfacemyImage.drawImage(myImage, null, null);   
-		myImage = myImageBinaire;
+		BufferedImage imgSrcBinaire = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+		Graphics2D surfaceimgSrc = imgSrcBinaire.createGraphics();
+		surfaceimgSrc.drawImage(imgSrc, null, null);   
+		imgSrc = imgSrcBinaire;
 		repaint();
-	}
+	}*/
 
-	protected void imageEnNiveauGris()
+	/*protected void imageEnNiveauGris()
 	{
-		BufferedImage imageGris = new BufferedImage(myImage.getWidth(), myImage.getHeight(), BufferedImage.TYPE_USHORT_GRAY);
-		Graphics2D surfacemyImage = imageGris.createGraphics();
-		surfacemyImage.drawImage(myImage, null, null);	      
-		myImage = imageGris;
+		BufferedImage imageGris = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_USHORT_GRAY);
+		Graphics2D surfaceimgSrc = imageGris.createGraphics();
+		surfaceimgSrc.drawImage(imgSrc, null, null);	      
+		imgSrc = imageGris;
 		repaint(); 
-	}
+	}*/
 
-	protected void ajouterImage(File fichierImage)
-	{   // desiiner une image à l'ecran	
+	protected void importImage(File imgFile)	//protected void ajouterImage(File imgFile)
+	{   // importe une image	
 		try {
-			myImage = ImageIO.read(fichierImage);
+			imgSrc = ImageIO.read(imgFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		repaint(); 
 	}
 
-	protected BufferedImage getImagePanneau()
-	{      // récupérer une image du panneau
+	protected BufferedImage getImagePanel()//protected BufferedImage getImagePanneau()
+	{   // recupere image affichee
 		int width  = this.getWidth();
 		int height = this.getHeight();
-		BufferedImage image = new BufferedImage(width, height,  BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = image.createGraphics();
+		BufferedImage imgDest = new BufferedImage(width, height,  BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = imgDest.createGraphics();
 
 		this.paintAll(g);
 		g.dispose();
-		return image;
+		return imgDest;
 	}
 
-	protected void enregistrerImage(File fichierImage)
+	protected void exportImage(File imgFile)//protected void enregistrerImage(File fichierImage)
 	{
-		String format ="JPG";
-		BufferedImage image = getImagePanneau();
+		String format ="png";
+		BufferedImage imgDest = getImagePanel();
 		try {
-			ImageIO.write(image, format, fichierImage);
+			ImageIO.write(imgDest, format, imgFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

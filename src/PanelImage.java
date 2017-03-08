@@ -28,8 +28,8 @@ public class PanelImage extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
     
-    BufferedImage monImage=null, histogramme=null;
-    BufferedImage imageOri=null;
+    BufferedImage monImage = null, histogramme=null;
+    BufferedImage imageOri = null;
     String nomImage;
 	public PanelImage() {
 		super();
