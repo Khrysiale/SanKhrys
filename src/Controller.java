@@ -91,31 +91,6 @@ public class Controller implements ApplicationListener{
 		
 	}
 
-
-
-	@Override
-	public void onBinariation() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onBrillance() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onAssombrir() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	@Override
 	public void onCurve() {
 		// TODO Auto-generated method stub
@@ -244,6 +219,54 @@ public class Controller implements ApplicationListener{
 
 	@Override
 	public void onOneStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onDodecahedronMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onTetrahedronMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onCubeMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onFill() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onPerspectiveMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onOrthogonalMenu() {
 		// TODO Auto-generated method stub
 		
 	}

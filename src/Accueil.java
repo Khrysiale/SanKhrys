@@ -67,12 +67,12 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	private final JMenuItem  quadrilateralMenu = new JMenuItem();
 	private final JMenuItem  ellipseMenu = new JMenuItem();	
 	private final JMenuItem  curveMenu = new JMenuItem();
+	private final JMenuItem cubeMenu = new JMenuItem();
+	private final JMenuItem tetrahedronMenu = new JMenuItem();
+	private final JMenuItem dodecahedronMenu = new JMenuItem();
 	
 	
-	
-	
-	
-	/*     MENU AND SUB MENUOUTILS*/
+	/*     MENU AND SUB MENU OUTILS*/
 	private final JMenu toolsMenu = new JMenu();
 	private final JMenuItem strokeMenu = new JMenu();
 	private final JMenuItem strokeColorMenu = new JMenuItem();
@@ -82,16 +82,23 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	private final JMenuItem treeStroke =new JMenuItem();
 	private final JMenuItem fourStroke =new JMenuItem();
 	private final JMenuItem noStroke =new JMenuItem();
-	private final JMenuItem brillanceMenu = new JMenuItem();
-	private final JMenuItem binarisationMenu = new JMenuItem();
+	private final JMenuItem fillMenu = new JMenuItem();
 	
 
 	/*        MENU AND SUB MENU HELP*/
 	private final JMenu helpMenu = new JMenu();
 	private final JMenuItem aboutMenu = new JMenuItem();
-	private final Canevas cavenas=new Canevas();
-	
+	private final Canevas cavenas=new Canevas();	
 	private   PanelImage panneau =null;
+	
+	/*        MENU CAMERA */
+	private final JMenu cameraMenu = new JMenu();
+	private final JMenuItem propertyMenu = new JMenuItem();
+	private final JMenu modeProjectionMenu = new JMenu();
+	private final JMenuItem perspectiveMenu = new JMenuItem();
+	private final JMenuItem orthogonalMenu = new JMenuItem();
+	
+	
 	
 
 	
@@ -124,7 +131,23 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		createFormMenu();
 		
 		createToolsMenu();
+		createCameraMenu();
 		createHelpMenu();
+		
+	}
+
+	private void createCameraMenu() {
+		
+		menuBar.add(cameraMenu);
+		cameraMenu.add(modeProjectionMenu);
+		modeProjectionMenu.add(perspectiveMenu);
+		modeProjectionMenu.add(orthogonalMenu);
+		perspectiveMenu.setText("Perspective");
+		perspectiveMenu.addActionListener(this);
+		orthogonalMenu.setText("Orthogonale");
+		orthogonalMenu.addActionListener(this);
+	
+		
 	}
 
 	private void createFileMenu() {
@@ -232,6 +255,17 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		drawing2DMenu.add(curveMenu);
 		curveMenu.addActionListener(this);
 		curveMenu.setText("Arc");
+		
+		drawing3DMenu.add(cubeMenu);
+		cubeMenu.setText("Cube");
+		cubeMenu.addActionListener(this);
+		drawing3DMenu.add(tetrahedronMenu);
+		tetrahedronMenu.setText("Tetrahedron");
+		tetrahedronMenu.addActionListener(this);
+		drawing3DMenu.add(dodecahedronMenu);
+		dodecahedronMenu.setText("Dodecahedron");
+		dodecahedronMenu.addActionListener(this);
+		
 
 	}
 
@@ -241,9 +275,9 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		toolsMenu.setText("Format");
 
 
-		toolsMenu.add(binarisationMenu);
-		binarisationMenu.addActionListener(this);
-		binarisationMenu.setText("Binarisation");
+		toolsMenu.add(fillMenu);
+		fillMenu.addActionListener(this);
+		fillMenu.setText("Remplissage");
 		toolsMenu.addSeparator();
 
 		toolsMenu.add(strokeMenu);
@@ -275,9 +309,6 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		
 		toolsMenu.addSeparator();
 
-		toolsMenu.add(brillanceMenu);
-		brillanceMenu.addActionListener(this);
-		brillanceMenu.setText("Brillance");
 	}
 
 	private void createHelpMenu(){
@@ -334,12 +365,8 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 			listener.onEllipse();
 		}else if(e.getSource().equals(curveMenu)){
 			listener.onCurve();
-		}else if(e.getSource().equals(strokeMenu)){
-			listener.onAssombrir();
-		}else if(e.getSource().equals(brillanceMenu)){
-			listener.onBrillance();
-		}else if(e.getSource().equals(binarisationMenu)){
-			listener.onBinariation();
+		}else if(e.getSource().equals(fillMenu)){
+			listener.onFill();
 		}else if(e.getSource().equals(aboutMenu)){
 			listener.onAbout();
 		}else if(e.getSource().equals(oneStroke)){
@@ -352,8 +379,18 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 			listener.onFourStroke();
 		}else if(e.getSource().equals(noStroke)){
 			listener.onNoStroke();
+		}else if(e.getSource().equals(cubeMenu)){
+			listener.onCubeMenu();
+		}else if(e.getSource().equals(tetrahedronMenu)){
+			listener.onTetrahedronMenu();
+		}else if(e.getSource().equals(dodecahedronMenu)){
+			listener.onDodecahedronMenu();
+		}else if(e.getSource().equals(perspectiveMenu)){
+			listener.onPerspectiveMenu();
+		}else if(e.getSource().equals(orthogonalMenu)){
+			listener.onOrthogonalMenu();
 		}
-
+		
 	}
 	
 	

@@ -20,12 +20,6 @@ public interface ApplicationListener {
 
 	void onAbout();
 
-	void onBinariation();
-
-	void onBrillance();
-
-	void onAssombrir();
-
 	void onCurve();
 
 	void onEllipse();
@@ -59,5 +53,17 @@ public interface ApplicationListener {
 	void onTwoStroket();
 
 	void onOneStroke();
+
+	void onDodecahedronMenu();
+
+	void onTetrahedronMenu();
+
+	void onCubeMenu();
+
+	void onFill();
+
+	void onPerspectiveMenu();
+
+	void onOrthogonalMenu();
 
 }
