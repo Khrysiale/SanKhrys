@@ -661,15 +661,7 @@ pixel[i][j]=g;
 		}
 
 	}
-	protected  void afficheHistograme(){
-		JFrame f=new JFrame();
-		f.setTitle("Histogramme RGB");
-		f.setBounds(365,200, 500,500);
-		Histogramme hist=new Histogramme(monImage);
-		f.add(hist);
-		f.setVisible(true);
-		
-	}
+	
 	protected void Retour(){
 		monImage=imageOri;
 		repaint();
