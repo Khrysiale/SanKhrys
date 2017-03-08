@@ -163,7 +163,7 @@ public class Controller implements ApplicationListener{
 	@Override
 	public void onImport() {
 		System.out.println("Dans controller ok");
-		manager.importImages();
+		manager.importImagesElement();
 		
 	}
 

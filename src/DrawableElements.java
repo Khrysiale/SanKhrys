@@ -2,17 +2,11 @@ import java.awt.Graphics;
 
 
 
-public abstract class DrawableElements {
+public interface DrawableElements {
 
-	public double[] getTab() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public double[] getTab();
 
-	public void draw(Graphics g, Canevas canevas) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void draw(Graphics g, Canevas canevas);
 	
 	
 	

@@ -1,14 +1,19 @@
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ElementManager {
+
+public class ElementManager implements DrawableElements{
 	
 	private List<DrawableElements> elements ;
 	private long idCurrentPoint;
 	private CavenasListener listener;
-	
+	private Canevas canevas;
 	public ElementManager(){
 		this.elements = new ArrayList<>();
 		this.listener = listener;
@@ -97,10 +102,22 @@ public class ElementManager {
 		}		
 	}
 
-	public void importImages() {
+	public void importImagesElement() {
 		System.out.println("Dans ElementManager ok");
-		ImageElement img = new ImageElement();
+		BufferedImage image;
+		System.out.println("Dans ImageElement ok");
+		JFileChooser fileOpenImage = new JFileChooser();
+		fileOpenImage.setAcceptAllFileFilterUsed(false);
+		String ext [] = {"bmp","jpg","jpeg","png"};
+		FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
+		fileOpenImage.addChoosableFileFilter(imgFilter);
+		
+		if(fileOpenImage.showOpenDialog(canevas)== JFileChooser.APPROVE_OPTION){
+			
+		}
 		
 	}
+
+	
 
 }
