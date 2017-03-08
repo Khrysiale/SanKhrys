@@ -34,6 +34,7 @@ public class ElementManager implements DrawableElements{
 	 * 
 	 */
 	public void addElement(DrawableElements elem){
+		
 		this.elements.add(elem);
 	}
 	
@@ -46,19 +47,51 @@ public class ElementManager implements DrawableElements{
 		this.elements.remove(elem);
 	}
 	
+
+
+	public long getIdCurrentPoint() { 
+		idCurrentPoint++; 
+		return idCurrentPoint; 
+	} 
+	
+	public void incrementIdCurrentPoint() { 
+        idCurrentPoint++; 
+    } 
+	
+	public void setIdCurrentPoint(long idCurrentPoint) { 
+        this.idCurrentPoint = idCurrentPoint; 
+    } 
+
 	/**
 	 * Mise à jour des id des éléments contenu dans la scene
 	 * 
 	 */
 	public void updateID(){
-		this.idCurrentPoint = 1;
-		
-		for(int i = 0; i < this.elements.size(); i++){
-			DrawableElements elem = this.elements.get(i);
-		}
+		this.idCurrentPoint = 1; 
+
+		for (int i = 0; i < this.elements.size(); i++) { 
+
+			DrawableElements elem = this.elements.get(i); 
+
+			if (elem instanceof DrawableElements) { 
+
+				PointElement[] pts = elem.getPoints(); 
+
+				if (pts != null) { 
+
+					for (int j = 0; j < pts.length; j++) { 
+						long id = pts[j].getId(); 
+
+						if (id > this.idCurrentPoint) { 
+							idCurrentPoint = id; 
+						} 
+					} 
+				} 
+			} 
+		} 
 	}
-	
-	
+
+
 	/**
 	 * Renvoie les valeurs posXMin, posYmin, posXMax, posYMax sous la forme d'un tableau
 	 */
@@ -104,18 +137,39 @@ public class ElementManager implements DrawableElements{
 
 	public void importImagesElement() {
 		System.out.println("Dans ElementManager ok");
-		BufferedImage image;
-		System.out.println("Dans ImageElement ok");
-		JFileChooser fileOpenImage = new JFileChooser();
-		fileOpenImage.setAcceptAllFileFilterUsed(false);
-		String ext [] = {"bmp","jpg","jpeg","png"};
-		FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
-		fileOpenImage.addChoosableFileFilter(imgFilter);
+		ImageElement img = new ImageElement();
+		elements.add(img);
 		
-		if(fileOpenImage.showOpenDialog(canevas)== JFileChooser.APPROVE_OPTION){
-			
-		}
+	}
+
+	@Override
+	public void setVisible(boolean flag) {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public PointElement[] getPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double[] tab() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getId() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	
