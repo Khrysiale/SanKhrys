@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
@@ -42,52 +43,45 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	private final JMenu     EditMenu = new JMenu();
 	private final JMenuItem undoMenu = new JMenuItem();
 	private final JMenuItem redoMenu = new JMenuItem();
-	private final JMenuItem enlargeMenu = new JMenuItem();
-	private final JMenuItem reduceMenu = new JMenuItem();
+	
 	
 	
 	
 	/*   MENU AND SUB MENU IMAGES*/
 	private final JMenu imageMenu = new JMenu();
-	private final JMenuItem shadesOfGrey = new JMenuItem();
-	private final JMenuItem importMenu = new JMenuItem();
-	private final JMenuItem exportMenu = new JMenuItem();
-	private final JMenuItem histogrammeMenu = new JMenuItem();
-	private final JMenuItem ConversionMenu = new JMenuItem();
-	private final JMenuItem  stretchMenu = new JMenuItem();
-	private final JMenuItem  equalizeMenu = new JMenuItem();
+		private final JMenuItem importMenu = new JMenuItem();
+	private final JMenuItem exportMenu = new JMenuItem();	
+	private final JMenuItem  filterMenu = new JMenuItem();
+	private final JMenuItem  tintMenu = new JMenuItem();
 	
 	
 	/*        MENU AND SUB MENU FORM */
 	private final JMenu formMenu = new JMenu();
-	private final JMenu form2DMenu = new JMenu();
-	private final JMenu form3DMenu = new JMenu();
+	private final JMenu drawing2DMenu = new JMenu();
+	private final JMenu drawing3DMenu = new JMenu();
 	private final JMenuItem  pointMenu = new JMenuItem();
 	private final JMenuItem  rectangleMenu = new JMenuItem();
 	private final JMenuItem  lineMenu = new JMenuItem();
 	private final JMenuItem  triangleMenu = new JMenuItem();
 	private final JMenuItem  squareMenu = new JMenuItem();
 	private final JMenuItem  quadrilateralMenu = new JMenuItem();
-	private final JMenuItem  polygonMenu = new JMenuItem();
-	private final JMenuItem  ellipseMenu = new JMenuItem();
-	private final JMenuItem  circleMenu = new JMenuItem();
+	private final JMenuItem  ellipseMenu = new JMenuItem();	
 	private final JMenuItem  curveMenu = new JMenuItem();
 	
 	
-	/*    MENU AND SUB MENU FILTER */
-	private final JMenu filterMenu = new JMenu();
-	private final JMenuItem filtermoyenneurMenu = new JMenuItem();
-	private final JMenuItem filtermedianMenu = new JMenuItem();
-	private final JMenuItem filtergaussienMenu = new JMenuItem();
-	private final JMenuItem filterCannytMenu = new JMenuItem();
-	private final JMenuItem filterSobelMenu = new JMenuItem();
-	private final JMenuItem filterlaplacienMenu = new JMenuItem();
-	private final JMenuItem filterpriwittMenu = new JMenuItem();
 	
 	
-	/*     MENU AND SUB MENU TRAITEMENT*/
-	private final JMenu traitementMenu = new JMenu();
-	private final JMenuItem assombrirMenu = new JMenuItem();
+	
+	/*     MENU AND SUB MENUOUTILS*/
+	private final JMenu toolsMenu = new JMenu();
+	private final JMenuItem strokeMenu = new JMenu();
+	private final JMenuItem strokeColorMenu = new JMenuItem();
+	private final JMenu strokeWeightMenu = new JMenu();
+	private final JMenuItem oneStroke =new JMenuItem();
+	private final JMenuItem twoStroke =new JMenuItem();
+	private final JMenuItem treeStroke =new JMenuItem();
+	private final JMenuItem fourStroke =new JMenuItem();
+	private final JMenuItem noStroke =new JMenuItem();
 	private final JMenuItem brillanceMenu = new JMenuItem();
 	private final JMenuItem binarisationMenu = new JMenuItem();
 	
@@ -102,14 +96,14 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 
 	
 
-	private JTabbedPane jTabbedPane=null;
+	private JPanel jTabbedPane=null;
 
 
 	public Accueil() {
 		super();
 		setBounds(150, 100,1000,600);
 		setTitle("SanKhrys application graphic ");
-		jTabbedPane=new JTabbedPane();
+		jTabbedPane=new JPanel();
 	
       
 		jTabbedPane.add("Sans titre",cavenas);	
@@ -128,8 +122,8 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		createEditMenu();
 		createImageMenu();
 		createFormMenu();
-		createFilterMenu();
-		createTraitementMenu();
+		
+		createToolsMenu();
 		createHelpMenu();
 	}
 
@@ -173,152 +167,115 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		undoMenu.addActionListener(this);
 		EditMenu.addSeparator();
 
-		EditMenu.add(enlargeMenu);
-		enlargeMenu.addActionListener(this);
-		enlargeMenu.setText("Agrandir");
-		EditMenu.add(reduceMenu);
-		reduceMenu.addActionListener(this);
-		reduceMenu.setText("Réduire");
-
 	}
 
 
 	private void createImageMenu(){
 		menuBar.add(imageMenu);
 		imageMenu.setText("Image");		
-		imageMenu.addSeparator();
+		
 
-		imageMenu.add(shadesOfGrey);
+		
 		imageMenu.add(importMenu);
 		imageMenu.add(exportMenu);
-		shadesOfGrey.addActionListener(this);
+		
 		importMenu.addActionListener(this);
 		importMenu.setText("Importer");
 		exportMenu.addActionListener(this);
 		exportMenu.setText("Exporter");
-		shadesOfGrey.setText("Niveau de Gris");
+		
 		imageMenu.addSeparator();
 
-		imageMenu.add(ConversionMenu);
-		ConversionMenu.addActionListener(this);
-		ConversionMenu.setText("Convesion");
-		imageMenu.add(histogrammeMenu);
-		histogrammeMenu.setText("Histogramme");
-		histogrammeMenu.addActionListener(this);
+		
+		
+
+		imageMenu.add(filterMenu);
+		filterMenu.setText("Filtre");
+		filterMenu.addActionListener(this);
 		imageMenu.addSeparator();
 
-		imageMenu.add(stretchMenu);
-		stretchMenu.setText("Etirer");
-		imageMenu.addSeparator();
-
-		imageMenu.add(equalizeMenu);
-		equalizeMenu.addActionListener(this);
-		equalizeMenu.setText("Egaliser");
+		imageMenu.add(tintMenu);
+		tintMenu.addActionListener(this);
+		tintMenu.setText("Teinte");
 	}
 
 
 	private void createFormMenu(){
 		menuBar.add(formMenu);
 		formMenu.setText("Formes");
-		formMenu.add(form2DMenu);
-		form2DMenu.setText("Formes 2D");
-		form3DMenu.setText("Formes 3D");
-		formMenu.add(form3DMenu);
-		form2DMenu.add(pointMenu);
+		formMenu.add(drawing2DMenu);
+		drawing2DMenu.setText("Dessins 2D");
+		drawing3DMenu.setText("Dessins 3D");
+		formMenu.add(drawing3DMenu);
+		drawing2DMenu.add(pointMenu);
 		pointMenu.addActionListener(this);
 		pointMenu.setText("Point");
-		form2DMenu.add(lineMenu);
+		drawing2DMenu.add(lineMenu);
 		lineMenu.addActionListener(this);
 		lineMenu.setText("Ligne");
-		form2DMenu.add(rectangleMenu);
+		drawing2DMenu.add(rectangleMenu);
 		rectangleMenu.addActionListener(this);
 		rectangleMenu.setText("Rectangle");
 
-		form2DMenu.add(triangleMenu);
+		drawing2DMenu.add(triangleMenu);
 		triangleMenu.addActionListener(this);
 		triangleMenu.setText("Triangle");
-		form2DMenu.add(squareMenu);
+		drawing2DMenu.add(squareMenu);
 		squareMenu.addActionListener(this);
 		squareMenu.setText("Carré");
-		form2DMenu.add(quadrilateralMenu);
+		drawing2DMenu.add(quadrilateralMenu);
 		quadrilateralMenu.addActionListener(this);
-		quadrilateralMenu.setText("Qualidratère");
-		form2DMenu.add(polygonMenu);
-		polygonMenu.addActionListener(this);
-		polygonMenu.setText("Polygone");
-		form2DMenu.add(ellipseMenu);
+		quadrilateralMenu.setText("Qualidratère");		
+		drawing2DMenu.add(ellipseMenu);
 		ellipseMenu.addActionListener(this);
 		ellipseMenu.setText("Ellipse");
-		form2DMenu.add(circleMenu);
-		circleMenu.addActionListener(this);
-		circleMenu.setText("Cercle");
-		form2DMenu.add(curveMenu);
+		drawing2DMenu.add(curveMenu);
 		curveMenu.addActionListener(this);
 		curveMenu.setText("Arc");
 
 	}
 
 
-	private void createFilterMenu(){
-		menuBar.add(filterMenu);	
-		filterMenu.setText("Filtre");
-
-		filterMenu.add(filtermoyenneurMenu);
-		filtermoyenneurMenu.setText("Filtre Moyenneur");
-		filtermoyenneurMenu.addActionListener(this);
+	private void createToolsMenu(){
+		menuBar.add(toolsMenu);
+		toolsMenu.setText("Format");
 
 
-
-		filterMenu.add(filtergaussienMenu);
-		filtergaussienMenu.setText("Filtre Gaussien");
-		filtermedianMenu.addActionListener(this);
-
-
-
-		filterMenu.add(filtermedianMenu);
-		filtermedianMenu.setText("Filtre Médian");
-		filtermedianMenu.addActionListener(this);
-		filterMenu.addSeparator();
-
-
-		filterMenu.add(filterSobelMenu);
-		filterSobelMenu.setText("Filtre Sobel");
-		filterSobelMenu.addActionListener(this);
-
-
-		filterMenu.add(filterpriwittMenu);
-		filterpriwittMenu.setText("Filtre Priwitt");
-		filterpriwittMenu.addActionListener(this);
-
-
-		filterMenu.add(filterlaplacienMenu);
-		filterlaplacienMenu.setText("Filtre Laplacien");
-		filterlaplacienMenu.addActionListener(this);
-
-
-
-		filterMenu.add(filterCannytMenu);
-		filterCannytMenu.setText("Filtre Canny");
-		filterCannytMenu.addActionListener(this);
-	}
-
-
-	private void createTraitementMenu(){
-		menuBar.add(traitementMenu);
-		traitementMenu.setText("Traitement");
-
-
-		traitementMenu.add(binarisationMenu);
+		toolsMenu.add(binarisationMenu);
 		binarisationMenu.addActionListener(this);
 		binarisationMenu.setText("Binarisation");
-		traitementMenu.addSeparator();
+		toolsMenu.addSeparator();
 
-		traitementMenu.add(assombrirMenu);
-		assombrirMenu.addActionListener(this);
-		assombrirMenu.setText("Assombrir");
-		traitementMenu.addSeparator();
+		toolsMenu.add(strokeMenu);
+		strokeMenu.addActionListener(this);
+		strokeMenu.setText("Contour");
+		strokeMenu.add(strokeColorMenu);
+		strokeColorMenu.setText("Couleur");
+		strokeColorMenu.addActionListener(this);
+		strokeMenu.add(strokeWeightMenu);
+		strokeWeightMenu.setText("Epaisseur");
+		
+		;
+		strokeWeightMenu.add(oneStroke);
+		strokeWeightMenu.add(twoStroke);
+		strokeWeightMenu.add(treeStroke);
+		strokeWeightMenu.add(fourStroke);
+		strokeWeightMenu.add(noStroke);
+		oneStroke.addActionListener(this);
+		twoStroke.addActionListener(this);
+		treeStroke.addActionListener(this);
+		fourStroke.addActionListener(this);
+		noStroke.addActionListener(this);
+		oneStroke.setText("1");
+		twoStroke.setText("2");
+		treeStroke.setText("3");
+		fourStroke.setText("4");
+		noStroke.setText("Sans contour");
+		
+		
+		toolsMenu.addSeparator();
 
-		traitementMenu.add(brillanceMenu);
+		toolsMenu.add(brillanceMenu);
 		brillanceMenu.addActionListener(this);
 		brillanceMenu.setText("Brillance");
 	}
@@ -353,24 +310,14 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 			listener.onUndoMenu();			
 		}else if(e.getSource().equals(redoMenu)){
 			listener.onRedoMenu();			
-		}else if(e.getSource().equals(enlargeMenu)){
-			listener.onEnlage();
-		}else if(e.getSource().equals(reduceMenu)){
-			listener.onReduce();
-		}else if(e.getSource().equals(shadesOfGrey)){
-			listener.onShadesOfGreys();
 		}else if(e.getSource().equals(importMenu )){
 			listener.onImport();
 		}else if(e.getSource().equals(exportMenu)){
 			listener.onExport();
-		}else if(e.getSource().equals(histogrammeMenu)){
-			listener.onHistogramme();
-		}else if(e.getSource().equals(ConversionMenu)){
-			listener.onConversion();
-		}else if(e.getSource().equals(stretchMenu)){
-			listener.onStretch();
-		}else if(e.getSource().equals(equalizeMenu)){
-			listener.onEqualize();
+		}else if(e.getSource().equals(filterMenu)){
+			listener.onFilter();
+		}else if(e.getSource().equals(tintMenu)){
+			listener.onTint();
 		}else if(e.getSource().equals(pointMenu)){
 			listener.onPoint();
 		}else if(e.getSource().equals(rectangleMenu)){
@@ -383,29 +330,11 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 			listener.onTriangle();
 		}else if(e.getSource().equals(quadrilateralMenu)){
 			listener.onQuadrilateral();
-		}else if(e.getSource().equals(polygonMenu)){
-			listener.onPolygon();
 		}else if(e.getSource().equals(ellipseMenu)){
 			listener.onEllipse();
-		}else if(e.getSource().equals( circleMenu)){
-			listener.onCircle();
 		}else if(e.getSource().equals(curveMenu)){
 			listener.onCurve();
-		}else if(e.getSource().equals(filtermoyenneurMenu)){
-			listener.onFilterMoyenneur();
-		}else if(e.getSource().equals(filtermedianMenu)){
-			listener.onFilterMedian();
-		}else if(e.getSource().equals(filtergaussienMenu)){
-			listener.onFilterGaussien();
-		}else if(e.getSource().equals( filterCannytMenu)){
-			listener.onFilterCanny();
-		}else if(e.getSource().equals(filterSobelMenu)){
-			listener.onFilterSobel();
-		}else if(e.getSource().equals(filterlaplacienMenu)){
-			listener.onFilterLaplacien();
-		}else if(e.getSource().equals(filterpriwittMenu)){
-			listener.onFilterPriwitt();
-		}else if(e.getSource().equals(assombrirMenu)){
+		}else if(e.getSource().equals(strokeMenu)){
 			listener.onAssombrir();
 		}else if(e.getSource().equals(brillanceMenu)){
 			listener.onBrillance();
@@ -413,6 +342,16 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 			listener.onBinariation();
 		}else if(e.getSource().equals(aboutMenu)){
 			listener.onAbout();
+		}else if(e.getSource().equals(oneStroke)){
+			listener.onOneStroke();
+		}else if(e.getSource().equals(twoStroke)){
+			listener.onTwoStroket();
+		}else if(e.getSource().equals(treeStroke)){
+			listener.onTreeStroke();
+		}else if(e.getSource().equals(fourStroke)){
+			listener.onFourStroke();
+		}else if(e.getSource().equals(noStroke)){
+			listener.onNoStroke();
 		}
 
 	}

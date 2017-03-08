@@ -26,27 +26,9 @@ public interface ApplicationListener {
 
 	void onAssombrir();
 
-	void onFilterPriwitt();
-
-	void onFilterLaplacien();
-
-	void onFilterSobel();
-
-	void onFilterCanny();
-
-	void onFilterGaussien();
-
-	void onFilterMedian();
-
-	void onFilterMoyenneur();
-
 	void onCurve();
 
-	void onCircle();
-
 	void onEllipse();
-
-	void onPolygon();
 
 	void onQuadrilateral();
 
@@ -60,22 +42,22 @@ public interface ApplicationListener {
 
 	void onPoint();
 
-	void onEqualize();
-
-	void onStretch();
-
-	void onConversion();
-
-	void onHistogramme();
-
 	void onExport();
 
 	void onImport();
 
-	void onShadesOfGreys();
+	void onFilter();
 
-	void onReduce();
+	void onTint();
 
-	void onEnlage();
+	void onNoStroke();
+
+	void onFourStroke();
+
+	void onTreeStroke();
+
+	void onTwoStroket();
+
+	void onOneStroke();
 
 }

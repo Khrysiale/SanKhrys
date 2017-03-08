@@ -116,93 +116,17 @@ public class Controller implements ApplicationListener{
 	}
 
 
-
-	@Override
-	public void onFilterPriwitt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onFilterLaplacien() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onFilterSobel() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onFilterCanny() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onFilterGaussien() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onFilterMedian() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onFilterMoyenneur() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
 	@Override
 	public void onCurve() {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-
-	@Override
-	public void onCircle() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
 	@Override
 	public void onEllipse() {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-	@Override
-	public void onPolygon() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 
 	@Override
@@ -254,38 +178,6 @@ public class Controller implements ApplicationListener{
 
 
 	@Override
-	public void onEqualize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onStretch() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onConversion() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void onHistogramme() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
 	public void onExport() {
 		// TODO Auto-generated method stub
 		
@@ -303,7 +195,7 @@ public class Controller implements ApplicationListener{
 
 
 	@Override
-	public void onShadesOfGreys() {
+	public void onFilter() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -311,7 +203,7 @@ public class Controller implements ApplicationListener{
 
 
 	@Override
-	public void onReduce() {
+	public void onTint() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -319,9 +211,42 @@ public class Controller implements ApplicationListener{
 
 
 	@Override
-	public void onEnlage() {
+	public void onNoStroke() {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public void onFourStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onTreeStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onTwoStroket() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onOneStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
