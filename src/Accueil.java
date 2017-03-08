@@ -188,7 +188,6 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		redoMenu.setText("Redo");
 		undoMenu.setText("Undo");
 		undoMenu.addActionListener(this);
-		EditMenu.addSeparator();
 
 	}
 
@@ -305,9 +304,6 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		treeStroke.setText("3");
 		fourStroke.setText("4");
 		noStroke.setText("Sans contour");
-		
-		
-		toolsMenu.addSeparator();
 
 	}
 
