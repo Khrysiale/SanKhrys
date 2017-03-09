@@ -36,14 +36,16 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	//public File imageSrc;//
 	public BufferedImage bImg = null;
 	public String imgName; //add
+	private long id;
 
 	//constructor1
-	public MyImage(){//public MyImage(Image pimage, String pimgName) {
+	public MyImage(long id){//public MyImage(Image pimage, String pimgName) {
 		//image = pimage;//new
        // imgName = pimgName;
         //fileName = pFile;//new
         super();
         setBounds(100,100,200,200);
+        this.id = id;
 	}
 	
 	//constructor2
@@ -53,12 +55,23 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	        //super();
 		//}
 	
-	protected void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		if(bImg != null)
-			g.drawImage(bImg,0,0,null);
-	}	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		 Graphics2D g2 = (Graphics2D) g;
+		if(bImg != null){
+			g2.drawImage(bImg,0,0,this);
+			g2.finalize();
+		}
+	}
+
 		
 	protected void importImage(File imgFile)	//protected void ajouterImage(File imgFile)
 	{   // importe une image	
@@ -169,15 +182,7 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 
 	}
 
-	@Override
-	public void draw(Graphics g) {
-		 Graphics2D g2 = (Graphics2D) g;
-		if(bImg != null){
-			g2.drawImage(bImg,0,0,this);
-			g2.finalize();
-		}
-	}
-
+	
 	
 	
 	

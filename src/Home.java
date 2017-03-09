@@ -405,16 +405,12 @@ public class Home extends JFrame implements ActionListener{
 		if(chooser.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
 			//File[] files = fileOpenImage.getSelectedFiles().getAbsolutePath();
 			File file = chooser.getSelectedFile();
-			MyImage img= new MyImage();
+			MyImage img= new MyImage(getCurrentId());
 			img.importImage(file);
 			object.add(img);
-			drawPanel.repaint();
-			
-
+			drawPanel.repaint();		
                         
-		}
-		
-		
+		}		
 	}
 
 	public void askSave() {
@@ -618,6 +614,7 @@ public class Home extends JFrame implements ActionListener{
 		
 		PointElement point = new PointElement(getCurrentId(),x,y);
 		object.add(point);
+		drawPanel.repaint();
 		
 	}
 
