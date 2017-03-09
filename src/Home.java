@@ -9,9 +9,11 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class Home extends JFrame implements ActionListener{
@@ -60,7 +64,7 @@ public class Home extends JFrame implements ActionListener{
 	private final JMenuItem  filterMenu = new JMenuItem();
 	private final JMenuItem  tintMenu = new JMenuItem();
 	
-	
+		
 	/*        MENU AND SUB MENU FORM */
 	private final JMenu formMenu = new JMenu();
 	private final JMenu drawing2DMenu = new JMenu();
@@ -104,7 +108,8 @@ public class Home extends JFrame implements ActionListener{
 	private final JMenuItem perspectiveMenu = new JMenuItem();
 	private final JMenuItem orthogonalMenu = new JMenuItem();
 
-	private JPanel jTabbedPane=null;
+	private JPanel jTabbedPane = null;
+	private MyImage image = null;
 	
 	MyDrawing drawPanel = new MyDrawing();
 	
@@ -118,7 +123,9 @@ public class Home extends JFrame implements ActionListener{
 		jTabbedPane.add("Sans titre",drawPanel); 
 		     
 		size = getSize();
-		getContentPane().add(drawPanel);
+		getContentPane().add(drawPanel);// ajouter panneau dessin a la fenêtre
+		// et associe avec objet de Drawable
+		//zone affichage des images
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				
 		try {
@@ -126,6 +133,8 @@ public class Home extends JFrame implements ActionListener{
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		
+	
 		
 	}
 
@@ -336,9 +345,22 @@ public class Home extends JFrame implements ActionListener{
 		}else if(e.getSource().equals(redoMenu)){
 			onRedoMenu();			
 		}else if(e.getSource().equals(importMenu )){
-			
-			
 			//listener.onImport();
+			JFileChooser chooser = new JFileChooser();
+			chooser.setAcceptAllFileFilterUsed(false);
+			String ext [] = {"bmp","jpg","jpeg","png"};
+			FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
+			chooser.addChoosableFileFilter(imgFilter);
+			/*********************************************************************************************************/
+			if(chooser.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
+				//File[] files = fileOpenImage.getSelectedFiles().getAbsolutePath();
+				File[] file = chooser.getSelectedFiles();
+				//drawPanel.importImage(file);
+
+	                        
+			}
+			
+	          	
 			
 			
 		}else if(e.getSource().equals(exportMenu)){
@@ -414,7 +436,6 @@ public class Home extends JFrame implements ActionListener{
         if(dialogButton == JOptionPane.OK_OPTION){ //The ISSUE is here
         }
 	}
-	
 	
 
 	private void onNewFileMenu() {
