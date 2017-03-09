@@ -8,15 +8,19 @@ import java.awt.Graphics2D;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class Home extends JFrame implements ActionListener{
@@ -54,7 +58,7 @@ public class Home extends JFrame implements ActionListener{
 	private final JMenuItem  filterMenu = new JMenuItem();
 	private final JMenuItem  tintMenu = new JMenuItem();
 	
-	
+		
 	/*        MENU AND SUB MENU FORM */
 	private final JMenu formMenu = new JMenu();
 	private final JMenu drawing2DMenu = new JMenu();
@@ -98,7 +102,8 @@ public class Home extends JFrame implements ActionListener{
 	private final JMenuItem perspectiveMenu = new JMenuItem();
 	private final JMenuItem orthogonalMenu = new JMenuItem();
 
-	private JPanel jTabbedPane=null;
+	private JPanel jTabbedPane = null;
+	private MyImage image = null;
 	
 	MyDrawing drawPanel = new MyDrawing();
 	
@@ -329,9 +334,23 @@ public class Home extends JFrame implements ActionListener{
 		}else if(e.getSource().equals(redoMenu)){
 			onRedoMenu();			
 		}else if(e.getSource().equals(importMenu )){
-			
-			
 			//listener.onImport();
+			
+			JFileChooser fileOpenImage = new JFileChooser();
+			fileOpenImage.setAcceptAllFileFilterUsed(false);
+			String ext [] = {"bmp","jpg","jpeg","png"};
+			FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
+			fileOpenImage.addChoosableFileFilter(imgFilter);
+			
+			if(fileOpenImage.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
+				File[] files = fileOpenImage.getSelectedFiles();
+			}
+			
+	        /*if (fileOpenImage.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+	               panel = new MyImage();
+	               panel.importImage(new File(fileOpenImage.getSelectedFile()
+	                         .getAbsolutePath()));
+	        }   */     	
 			
 			
 		}else if(e.getSource().equals(exportMenu)){

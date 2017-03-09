@@ -26,27 +26,68 @@ import javax.swing.JPanel;
  * param[in] pImage image choisi
  * param[in] pFile le nom du fichier image
  */
-public class MyImage extends JPanel  { //public class Image extends JPanel  {
+public class MyImage extends JPanel { //public class Image implements Drawable {
 
-	public Image loadedImage;//add
-	public BufferedImage image = null;
-	public String fileName; //add
-	//BufferedImage imgSrc = null;
+	//public Image image = null;//ok
+	//public File imageSrc;//
+	public BufferedImage bImg = null;
+	public String imgName; //add
 
-	//constructor
-	public MyImage(Image pImage,String pFile) { //public MyImage() {
-		loadedImage = pImage;//new
-        fileName = pFile;//new
-        //super();
+	//constructor1
+	public MyImage(){//public MyImage(Image pimage, String pimgName) {
+		//image = pimage;//new
+       // imgName = pimgName;
+        //fileName = pFile;//new
+        super();
+        setBounds(100,100,200,200);
 	}
+	
+	//constructor2
+		//public MyImage(String pfileName) {
+			//this.image = getToolkit().getImage(pfileName);//new
+	        //fileName = pFile;//new
+	        //super();
+		//}
 	
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		if(image != null)
-			g.drawImage(image, 0, 0, null);
+		if(bImg != null)
+			g.drawImage(bImg,0,0,null);
+	}	
+		
+	protected void importImage(File imgFile)	//protected void ajouterImage(File imgFile)
+	{   // importe une image	
+		try {
+			imgName = imgFile.getName();
+			bImg = ImageIO.read(imgFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		/*int w = bImg.getWidth(null);
+		int h = bImg.getHeight(null);
+		BufferedImage bi = new
+		    BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = bi.getGraphics();
+		g.drawImage(bImg, 0, 0, null);*/
+		repaint(); 
 	}
+	
+	
+	
+	protected BufferedImage getImagePanel()
+	{   // recupere image affichee
+		int width  = this.getWidth();
+		int height = this.getHeight();
+		BufferedImage image = new BufferedImage(width, height,  BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
 
+		this.paintAll(g);
+		g.dispose();
+		return image;
+	}
+	
+	
 	protected void colorSpace(){
 		int red = 255;
 		int blue = 0;
@@ -75,7 +116,7 @@ public class MyImage extends JPanel  { //public class Image extends JPanel  {
 	//rend une image flou 
 	protected void filterImage()
 	{
-		BufferedImage imgBlurry = new BufferedImage(image.getWidth(),image.getHeight(), image.getType());
+		BufferedImage imgBlurry = new BufferedImage(bImg.getWidth(),bImg.getHeight(), bImg.getType());
 		float[ ] maskBlurry = 
 		{
 				0.1f, 0.1f, 0.1f,
@@ -85,8 +126,8 @@ public class MyImage extends JPanel  { //public class Image extends JPanel  {
 
 		Kernel mask = new Kernel(3, 3, maskBlurry);
 		ConvolveOp operation = new ConvolveOp(mask);
-		operation.filter(image, imgBlurry);
-		image = imgBlurry;
+		operation.filter(bImg, imgBlurry);
+		bImg = imgBlurry;
 		//System.out.println("convolution effectuee");
 		repaint();
 	}
@@ -108,34 +149,16 @@ public class MyImage extends JPanel  { //public class Image extends JPanel  {
 	
 
 
-	protected void importImage(File imgFile)	//protected void ajouterImage(File imgFile)
-	{   // importe une image	
-		try {
-			image = ImageIO.read(imgFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		repaint(); 
-	}
+	
 
-	protected BufferedImage getImagePanel()//protected BufferedImage getImagePanneau()
-	{   // recupere image affichee
-		int width  = this.getWidth();
-		int height = this.getHeight();
-		BufferedImage imgDest = new BufferedImage(width, height,  BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = imgDest.createGraphics();
-
-		this.paintAll(g);
-		g.dispose();
-		return imgDest;
-	}
+	
 
 	protected void exportImage(File imgFile)//protected void enregistrerImage(File fichierImage)
 	{
 		String format ="png";
-		BufferedImage imgDest = getImagePanel();
+		BufferedImage image = getImagePanel();
 		try {
-			ImageIO.write(imgDest, format, imgFile);
+			ImageIO.write(image, format, imgFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
