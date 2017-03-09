@@ -1,19 +1,19 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-
+import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ImageElement implements DrawableElements{
+public class ImageElement {
 	
-	BufferedImage image;
-	Canevas canevas;
+	BufferedImage image;;
 	long id;
 		
 	
-	public ImageElement(long id){
+	public ImageElement(long id,JPanel pan){
 		
 		System.out.println("Dans ImageElement ok");
 		this.id = id;
@@ -23,63 +23,15 @@ public class ImageElement implements DrawableElements{
 		FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
 		fileOpenImage.addChoosableFileFilter(imgFilter);
 		
-		if(fileOpenImage.showOpenDialog(canevas)== JFileChooser.APPROVE_OPTION){
-			
+		if(fileOpenImage.showOpenDialog(pan)== JFileChooser.APPROVE_OPTION){
+			File[] files = fileOpenImage.getSelectedFiles();
 		}
 	}
 
-	@Override
-	public double[] getTab() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void draw(Graphics g, Canevas canevas) {
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void setVisible(boolean flag) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public PointElement[] getPoints() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double[] tab() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long getIdCurrentElement() {
-		// TODO Auto-generated method stub
-		return id;
-	}
-
-	@Override
-	public Elements[] getElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-		
-		
-        
 	
 }
 

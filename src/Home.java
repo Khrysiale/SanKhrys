@@ -1,22 +1,36 @@
-/*cet classe */
+/*cette classe affiche le menu et appelle les classe lors des évènements*/
+
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
 
-public class Accueil extends JFrame implements ActionListener, CavenasListener {
+public class Home extends JFrame implements ActionListener{
 	
 	private static final long serialVersionUID = 4648688787386404371L;
-	public static Accueil ui;
+	public static Home ui;
 	
-	private ApplicationListener listener;
-	//private DrawableElements elements;
+	private ActionListener listener;
+	private List<Drawable> object = new ArrayList<>();
+	private long id = 0;
+	
+	Dimension size ;
+	
+
 	
 	private final JMenuBar menuBar = new JMenuBar();
 	
@@ -74,8 +88,8 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	/*        MENU AND SUB MENU HELP*/
 	private final JMenu helpMenu = new JMenu();
 	private final JMenuItem aboutMenu = new JMenuItem();
-	private final Canevas cavenas=new Canevas();	
-	private   PanelImage panneau =null;
+		
+	
 	
 	/*        MENU CAMERA */
 	private final JMenu cameraMenu = new JMenu();
@@ -83,32 +97,30 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	private final JMenu modeProjectionMenu = new JMenu();
 	private final JMenuItem perspectiveMenu = new JMenuItem();
 	private final JMenuItem orthogonalMenu = new JMenuItem();
-	
-	
-	
-
-	
 
 	private JPanel jTabbedPane=null;
+	
+	MyDrawing drawPanel = new MyDrawing();
+	
 
-
-	public Accueil() {
+	/*    Constructor of Home class   */
+	public Home() {
 		super();
 		setBounds(150, 100,1000,600);
 		setTitle("SanKhrys application graphic ");
 		jTabbedPane=new JPanel();
-	
-      
-		jTabbedPane.add("Sans titre",cavenas);	
-		getContentPane().add(jTabbedPane);
+		jTabbedPane.add("Sans titre",drawPanel); 
+		     
+		size = getSize();
+		getContentPane().add(drawPanel);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		//ss
-		setAlwaysOnTop(true);//permet de garder la fen�tre sur le dessus
+				
 		try {
 			createMenu();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	private void createMenu() throws Exception {
@@ -183,9 +195,6 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	private void createImageMenu(){
 		menuBar.add(imageMenu);
 		imageMenu.setText("Image");		
-		
-
-		
 		imageMenu.add(importMenu);
 		imageMenu.add(exportMenu);
 		
@@ -197,8 +206,6 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		imageMenu.addSeparator();
 
 		
-		
-
 		imageMenu.add(filterMenu);
 		filterMenu.setText("Filtre");
 		filterMenu.addActionListener(this);
@@ -305,97 +312,267 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	}
 
 
-	// ajouter le panneau de dessin 
-
-
-
 	/* LISTENER DES JMENUITEM*/
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(openMenu))	{
-			listener.onOpenMenu();
+			onOpenMenu();
 		}else if(e.getSource().equals(newFileMenu)){
-			listener.onNewFileMenu();			
+			onNewFileMenu();			
 		}else if(e.getSource().equals(saveMenu )){
-			listener.onSaveMenu();			
+			onSaveMenu();			
 		}else if(e.getSource().equals(saveAsMenu)){
-			listener.onSaveAsMenu();
+			onSaveAsMenu();
 		}else if(e.getSource().equals(quitMenu)){
-			listener.onQuitMenu();			
+			onQuitMenu();			
 		}else if(e.getSource().equals(undoMenu)){
-			listener.onUndoMenu();			
+			onUndoMenu();			
 		}else if(e.getSource().equals(redoMenu)){
-			listener.onRedoMenu();			
+			onRedoMenu();			
 		}else if(e.getSource().equals(importMenu )){
-			listener.onImport();
+			
+			
+			//listener.onImport();
+			
+			
 		}else if(e.getSource().equals(exportMenu)){
-			listener.onExport();
+			onExport();
 		}else if(e.getSource().equals(filterMenu)){
-			listener.onFilter();
+			onFilter();
 		}else if(e.getSource().equals(tintMenu)){
-			listener.onTint();
+			onTint();
 		}else if(e.getSource().equals(pointMenu)){
-			listener.onPoint();
+			onPoint(size.getWidth()/4, size.getHeight()/4);
 		}else if(e.getSource().equals(rectangleMenu)){
-			listener.onRectangle();
+			onRectangle();
 		}else if(e.getSource().equals(lineMenu)){
-			listener.onLine();
+			onLine();
 		}else if(e.getSource().equals(squareMenu)){
-			listener.onSquare();
+			onSquare();
 		}else if(e.getSource().equals(triangleMenu)){
-			listener.onTriangle();
+			onTriangle();
 		}else if(e.getSource().equals(quadrilateralMenu)){
-			listener.onQuadrilateral();
+			onQuadrilateral();
 		}else if(e.getSource().equals(ellipseMenu)){
-			listener.onEllipse();
+			onEllipse();
 		}else if(e.getSource().equals(curveMenu)){
-			listener.onCurve();
+			onCurve();
 		}else if(e.getSource().equals(fillMenu)){
-			listener.onFill();
+			onFill();
 		}else if(e.getSource().equals(aboutMenu)){
-			listener.onAbout();
+			onAbout();
 		}else if(e.getSource().equals(oneStroke)){
-			listener.onOneStroke();
+			onOneStroke();
 		}else if(e.getSource().equals(twoStroke)){
-			listener.onTwoStroket();
+			onTwoStroket();
 		}else if(e.getSource().equals(treeStroke)){
-			listener.onTreeStroke();
+			onTreeStroke();
 		}else if(e.getSource().equals(fourStroke)){
-			listener.onFourStroke();
+			onFourStroke();
 		}else if(e.getSource().equals(noStroke)){
-			listener.onNoStroke();
+			onNoStroke();
 		}else if(e.getSource().equals(cubeMenu)){
-			listener.onCubeMenu();
+			onCubeMenu();
 		}else if(e.getSource().equals(tetrahedronMenu)){
-			listener.onTetrahedronMenu();
+			onTetrahedronMenu();
 		}else if(e.getSource().equals(dodecahedronMenu)){
-			listener.onDodecahedronMenu();
+			onDodecahedronMenu();
 		}else if(e.getSource().equals(perspectiveMenu)){
-			listener.onPerspectiveMenu();
+			onPerspectiveMenu();
 		}else if(e.getSource().equals(orthogonalMenu)){
-			listener.onOrthogonalMenu();
+			onOrthogonalMenu();
 		}
 		
 	}
 	
 	
+	private void onNewFileMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onOpenMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onSaveMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onQuitMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onSaveAsMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onUndoMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onRedoMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onOrthogonalMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onPerspectiveMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onDodecahedronMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onTetrahedronMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onCubeMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onNoStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onFourStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onTreeStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onTwoStroket() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onOneStroke() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onAbout() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onFill() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onCurve() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onEllipse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onQuadrilateral() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onTriangle() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onSquare() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onLine() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onRectangle() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onPoint(double x, double y) {
+		
+		PointElement point = new PointElement(getCurrentId(),x,y);
+		object.add(point);
+		
+	}
+
+	private long getCurrentId() {
+		id++;
+		return id;
+	}
+
+	private void onTint() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onFilter() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void onExport() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/* POUR PARLER AVEC LE CONTROLLER*/	
-	public ApplicationListener getListener(){
+	public ActionListener getListener(){
 		return this.listener;
 	}
 	
-	public void addListener(ApplicationListener listener){
+	public void addListener(ActionListener listener){
 		this.listener = listener;
-		this.listener.onInit();
-	}
-
-	public Canevas getCanevas() {
-		return this.cavenas;
 		
 	}
-	
+
+		
 	
 	/************************************************************************************************************************************
 	 * 									Functions general
 	 */
+	
+	class MyDrawing extends JPanel 	{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7607914951091976874L;
+
+		/* Faire dessiner le tableau de composant ici*/
+		public void paintComponent(Graphics g) {
+			for (Drawable d : object){
+		        d.draw(g);
+		    }
+		}
+	}
+	public void paintComponent(Graphics g) {
+		Graphics2D graphics2d = (Graphics2D)g;
+	}
 
 }

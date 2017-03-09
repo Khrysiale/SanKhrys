@@ -141,6 +141,9 @@ public class MyImage extends JPanel  { //public class Image extends JPanel  {
 		}
 
 	}
+
+	
+	
 	
 	/*protected void reduireImage()
 	{

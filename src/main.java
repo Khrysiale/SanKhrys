@@ -1,16 +1,13 @@
 
+
+
+
 public class main {
 
-	public static void main(String args[]) 
-	{
-		try {
-			Accueil frame = new Accueil();
-			Controller controller = new Controller(frame);
-			
+	public static void main(String args[]){
+		
+			Home frame = new Home();
 			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 }

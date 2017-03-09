@@ -1,101 +1,48 @@
+/**
+ * 
+ * Class qui génère un simple point en x, y .
+ * 
+ * */
+
+
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 
-public class PointElement implements DrawableElements{
+public class PointElement  extends Point2D.Double implements Drawable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2815801024727347338L;
 	private double x,y;
+	
+
 	private long id;
 	private boolean visible;
-	private Canevas canevas;
+	Graphics2D g2;
+	Point2D.Double point ;
+	
 	
 	public PointElement(long id, double x, double y){
 		this.id=id;
 		this.x = x;
 		this.y = y;
 		this.visible = true;
-	}
-	
-	public PointElement(){
-		this.id = 0;
-		this.x = 0;
-		this.y = 0;
-		this.visible = false;
-	}
-
-	@Override
-	public double[] getTab() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void draw(Graphics g, Canevas canevas) {
-		if(this.isVisible()){
-			int xPos = canevas.getScreenLocalX(this.x);
-			int yPos = canevas.getScreenLocalY(this.y);
-			
-			int[] xPoints = {xPos+5, xPos-5, xPos -5, xPos+5,xPos+5};
-			int[] yPoints = {yPos+5, yPos-5, yPos -5, yPos+5,yPos+5};
-			
-			g.setColor(Color.BLACK);
-			g.drawPolyline(xPoints, yPoints, 5);
-		}
+		point = new Point2D.Double(this.x,this.y);
 		
 	}
 
+
 	@Override
-	public void setVisible(boolean flag) {
-		this.visible = flag; 
+	public void draw(Graphics g) {
+		g.setColor(Color.BLACK);
+		((Graphics2D) g).setStroke(new BasicStroke(2.0f));
+		g.drawLine((int)this.x,(int)this.y,(int)this.x,(int)this.y);
 		
 	}
 
-	@Override
-	public boolean isVisible() {
-		return this.visible; 
-	}
-
-	@Override
-	public PointElement[] getPoints() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double[] tab() {
-		return new double[]{this.x,this.x,this.y,this.y}; 
-	}
 	
-	public void setId(long id){
-		this.id = id;
-	}
-	
-	public void setX(double x){
-		this.x = x;
-	}
-	
-	public double getX(){
-		return x;
-	}
-	
-	public void setY(double y){
-		this.y = y;
-	}
-	
-	public double getY(){
-		return y;
-	}
-
-	@Override
-	public long getIdCurrentElement() {
-		return this.id;
-	}
-
-	@Override
-	public Elements[] getElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-
 }
