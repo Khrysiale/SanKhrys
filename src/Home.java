@@ -8,13 +8,19 @@ import java.awt.Graphics2D;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -170,6 +176,7 @@ public class Home extends JFrame implements ActionListener{
 		saveMenu.addActionListener(this);
 		saveMenu.setText("Enregistrer");
 		saveAsMenu.setText("Enregistrer Sous");
+		saveAsMenu.addActionListener(this);
 		fileMenu.addSeparator();
 
 		fileMenu.add(quitMenu);
@@ -383,8 +390,33 @@ public class Home extends JFrame implements ActionListener{
 		}
 		
 	}
+	public void askSave() {
+		int answer = showChoiceDialog("Voulez-vous sauvegarder?", "oui","non");
+		if( answer == 0){
+			onSaveAsMenu();
+		}	
+		System.exit(0);
+	}
+	
+	public int showChoiceDialog(String text, String choice1, String choice2){
+		Object[] options = {choice1,choice2};
+		int choice = JOptionPane.showOptionDialog(this, text,null, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,options,options[0]);
+        if(choice == 0){
+        	return 0;
+        }
+        else return 1;
+	}
+	
+	public void showMessageDialog(String text, String buttonText){
+		 int dialogButton = JOptionPane.OK_OPTION;
+        JOptionPane.showMessageDialog (null, text,"Information",0);
+
+        if(dialogButton == JOptionPane.OK_OPTION){ //The ISSUE is here
+        }
+	}
 	
 	
+
 	private void onNewFileMenu() {
 		// TODO Auto-generated method stub
 		
@@ -396,7 +428,7 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onSaveMenu() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -406,7 +438,48 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onSaveAsMenu() {
-		// TODO Auto-generated method stub
+		String PathToSave = null;
+		
+		JFileChooser fc = new JFileChooser();
+		fc.setCurrentDirectory(new File(System.getProperty("user.home")));
+		int response = fc.showSaveDialog(null);
+		if(response == JFileChooser.APPROVE_OPTION){
+			PathToSave = fc.getSelectedFile().toString();
+			if (!PathToSave.isEmpty())
+			{
+				onSaveAs(PathToSave);
+			}
+		}
+		else {
+			showMessageDialog("Sauvegarde annuler", "Ok");
+		}		
+		
+	}
+
+	private void onSaveAs(String pathToSave) {
+		try {
+			File f = new File(pathToSave+".ser");
+			System.out.println();
+			if(f.exists()){
+				int answer = ui.showChoiceDialog(pathToSave+".ser exite déjà, voulez-vous l'écraser?","Oui", "Non");
+				if( answer == 0){
+					performSerialization(jTabbedPane, pathToSave);
+				}
+			}
+			if (!f.exists()) {
+				performSerialization(jTabbedPane, pathToSave);
+			}			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private  static void performSerialization(JPanel jTabbedPane2, String pathToSave) throws IOException {
+		FileOutputStream fos=new FileOutputStream(new File(pathToSave+".ser")) ;
+        ObjectOutputStream out=new ObjectOutputStream(fos);
+        out.writeObject(jTabbedPane2);
+        out.close();
 		
 	}
 
@@ -558,7 +631,7 @@ public class Home extends JFrame implements ActionListener{
 	 * 									Functions general
 	 */
 	
-	class MyDrawing extends JPanel 	{
+	class MyDrawing extends JPanel{
 		/**
 		 * 
 		 */
