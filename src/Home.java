@@ -8,10 +8,12 @@ import java.awt.Graphics2D;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class Home extends JFrame implements ActionListener{
 	
 	Dimension size ;
 	
-
+	private static ArrayList<byte[]> maByteArray = new ArrayList<byte[]>();
 	
 	private final JMenuBar menuBar = new JMenuBar();
 	
@@ -109,7 +111,7 @@ public class Home extends JFrame implements ActionListener{
 	private final JMenuItem orthogonalMenu = new JMenuItem();
 
 	private JPanel jTabbedPane = null;
-	private MyImage image = null;
+	
 	
 	MyDrawing drawPanel = new MyDrawing();
 	
@@ -395,6 +397,16 @@ public class Home extends JFrame implements ActionListener{
 		}
 		
 	}
+	
+	private void onOpenMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * Fonction d'importation d'une image
+	 * l'image est ensuite placé dans le tableau d'object qui sera rendu dans la zone de travail
+	 */
 	private void onImport() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setAcceptAllFileFilterUsed(false);
@@ -413,6 +425,10 @@ public class Home extends JFrame implements ActionListener{
 		}		
 	}
 
+	/**
+	 * Fonction qui demande si l'utilisateur veut sauvegarder avant de quitter. Fait appel à la fonction showChoiceDialog
+	 * Si la réponse est non, on quitte simplement le programme
+	 */
 	public void askSave() {
 		int answer = showChoiceDialog("Voulez-vous sauvegarder?", "oui","non");
 		if( answer == 0){
@@ -420,6 +436,8 @@ public class Home extends JFrame implements ActionListener{
 		}	
 		System.exit(0);
 	}
+	
+	
 	
 	public int showChoiceDialog(String text, String choice1, String choice2){
 		Object[] options = {choice1,choice2};
@@ -434,7 +452,7 @@ public class Home extends JFrame implements ActionListener{
 		 int dialogButton = JOptionPane.OK_OPTION;
         JOptionPane.showMessageDialog (null, text,"Information",0);
 
-        if(dialogButton == JOptionPane.OK_OPTION){ //The ISSUE is here
+        if(dialogButton == JOptionPane.OK_OPTION){ 
         }
 	}
 	
@@ -444,8 +462,13 @@ public class Home extends JFrame implements ActionListener{
 		
 	}
 
-	private void onOpenMenu() {
-		// TODO Auto-generated method stub
+
+	
+
+	private void clearAll() {
+		this.object= new ArrayList<Drawable>();
+		this.id = 0;
+		drawPanel.repaint();
 		
 	}
 
@@ -455,9 +478,16 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onQuitMenu() {
-		// TODO Auto-generated method stub
+		askSave();
 		
 	}
+	
+	
+	/***
+	 * Fonction lorsque l'utilisateur clique sur Enregistrer sous
+	 * Enregistre sur le disque dur la zone de dessin tel quel pour une reprise du travail plus tard
+	 * 
+	 */
 
 	private void onSaveAsMenu() {
 		String PathToSave = null;
@@ -496,6 +526,7 @@ public class Home extends JFrame implements ActionListener{
 		}
 		
 	}
+	
 
 	private  static void performSerialization(JPanel jTabbedPane2, String pathToSave) throws IOException {
 		FileOutputStream fos=new FileOutputStream(new File(pathToSave+".ser")) ;
