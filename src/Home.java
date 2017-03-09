@@ -339,7 +339,6 @@ public class Home extends JFrame implements ActionListener{
 			onRedoMenu();			
 		}else if(e.getSource().equals(importMenu )){
 			//listener.onImport();
-			
 			JFileChooser chooser = new JFileChooser();
 			chooser.setAcceptAllFileFilterUsed(false);
 			String ext [] = {"bmp","jpg","jpeg","png"};
