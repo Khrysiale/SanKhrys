@@ -345,24 +345,7 @@ public class Home extends JFrame implements ActionListener{
 		}else if(e.getSource().equals(redoMenu)){
 			onRedoMenu();			
 		}else if(e.getSource().equals(importMenu )){
-			//listener.onImport();
-			JFileChooser chooser = new JFileChooser();
-			chooser.setAcceptAllFileFilterUsed(false);
-			String ext [] = {"bmp","jpg","jpeg","png"};
-			FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
-			chooser.addChoosableFileFilter(imgFilter);
-			/*********************************************************************************************************/
-			if(chooser.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
-				//File[] files = fileOpenImage.getSelectedFiles().getAbsolutePath();
-				File[] file = chooser.getSelectedFiles();
-				//drawPanel.importImage(file);
-
-	                        
-			}
-			
-	          	
-			
-			
+			onImport();			
 		}else if(e.getSource().equals(exportMenu)){
 			onExport();
 		}else if(e.getSource().equals(filterMenu)){
@@ -412,6 +395,28 @@ public class Home extends JFrame implements ActionListener{
 		}
 		
 	}
+	private void onImport() {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setAcceptAllFileFilterUsed(false);
+		String ext [] = {"bmp","jpg","jpeg","png"};
+		FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
+		chooser.addChoosableFileFilter(imgFilter);
+		/*********************************************************************************************************/
+		if(chooser.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
+			//File[] files = fileOpenImage.getSelectedFiles().getAbsolutePath();
+			File file = chooser.getSelectedFile();
+			MyImage img= new MyImage();
+			img.importImage(file);
+			object.add(img);
+			drawPanel.repaint();
+			
+
+                        
+		}
+		
+		
+	}
+
 	public void askSave() {
 		int answer = showChoiceDialog("Voulez-vous sauvegarder?", "oui","non");
 		if( answer == 0){

@@ -26,8 +26,12 @@ import javax.swing.JPanel;
  * param[in] pImage image choisi
  * param[in] pFile le nom du fichier image
  */
-public class MyImage extends JPanel { //public class Image implements Drawable {
+public class MyImage extends JPanel implements Drawable { //public class Image implements Drawable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8871673203084539139L;
 	//public Image image = null;//ok
 	//public File imageSrc;//
 	public BufferedImage bImg = null;
@@ -163,6 +167,15 @@ public class MyImage extends JPanel { //public class Image implements Drawable {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		 Graphics2D g2 = (Graphics2D) g;
+		if(bImg != null){
+			g2.drawImage(bImg,0,0,this);
+			g2.finalize();
+		}
 	}
 
 	

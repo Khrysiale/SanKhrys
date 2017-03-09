@@ -14,7 +14,7 @@ public class ImageElement extends JPanel{
 	long id;
 		
 	
-	public ImageElement(long id,JPanel pan){
+	public ImageElement(long id){
 		
 		System.out.println("Dans ImageElement ok");
 		this.id = id;
