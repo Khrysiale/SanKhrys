@@ -57,20 +57,6 @@ public class Image extends JPanel  {
 		
 	}
 	 
-	
-
-	/*protected void reduireImage()
-	{
-		BufferedImage imageReduite = new BufferedImage((int)(imgSrc.getWidth()*0.5),(int)( imgSrc.getHeight()*0.5), imgSrc.getType());
-		AffineTransform reduire = AffineTransform.getScaleInstance(0.5, 0.5);
-		int interpolation = AffineTransformOp.TYPE_BICUBIC;
-		AffineTransformOp retaillerImage = new AffineTransformOp(reduire, interpolation);
-		retaillerImage.filter(imgSrc, imageReduite );
-		imgSrc = imageReduite ;
-		repaint();
-	}*/
-
-
 	/*protected void agrandirImage()
 	{
 		BufferedImage imageZoomer = new BufferedImage((int)(imgSrc.getWidth()*1.5),(int)( imgSrc.getHeight()*1.5), imgSrc.getType());
@@ -99,53 +85,8 @@ public class Image extends JPanel  {
 		imgSrc = imgBlurry;
 		//System.out.println("convolution effectuee");
 		repaint();
-
 	}
 
-
-	/*
-	 *    RescaleOp brillance = new RescaleOp(A, K, null);
-	 *    1.  A< 1, l’image devient plus sombre.
-			  2.  A > 1, l’image devient  plus brillante.
-			  3. K est compris entre 0 et 256 et ajoute un éclairement .
-	 */
-	
-	/*protected void imageEclaircie()
-	{
-		BufferedImage imgSrcBrillant = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_INT_RGB);
-		RescaleOp brillance = new RescaleOp(1.2f, 0, null);
-		brillance.filter(imgSrc, imgSrcBrillant);
-		imgSrc = imgSrcBrillant;
-		repaint();
-	}*/
-
-	
-		/* RescaleOp assombrir = new RescaleOp(A, K, null);
-		 *    
-		 *    1.  A < 1, l’image devient plus sombre.
-				  2.  A > 1, l’image devient  plus brillante.
-				  3.  K est compris entre 0 et 256 et ajoute un éclairement .
-		 *    
-		 */		
-	/*protected void imageSombre()
-	{
-		
-		BufferedImage imgSrcSombre = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_INT_RGB);
-		RescaleOp assombrir = new RescaleOp(0.7f, 10, null);
-		assombrir.filter(imgSrc, imgSrcSombre);
-		imgSrc = imgSrcSombre;
-		System.out.println("assombrir effectuée");
-		repaint();
-	}*/
-
-	/*protected void imageBinaire()
-	{   
-		BufferedImage imgSrcBinaire = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
-		Graphics2D surfaceimgSrc = imgSrcBinaire.createGraphics();
-		surfaceimgSrc.drawImage(imgSrc, null, null);   
-		imgSrc = imgSrcBinaire;
-		repaint();
-	}*/
 
 	/*protected void imageEnNiveauGris()
 	{

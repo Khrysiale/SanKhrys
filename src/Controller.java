@@ -22,7 +22,6 @@ public class Controller implements ApplicationListener{
 	}
 
 	
-
 	@Override
 	public void onInit() {
 		// TODO Auto-generated method stub

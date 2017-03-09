@@ -1,3 +1,4 @@
+/*cet classe */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -9,22 +10,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 
 
-
-
-
-
 public class Accueil extends JFrame implements ActionListener, CavenasListener {
-
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4648688787386404371L;
-
 	public static Accueil ui;
 	
-
-
 	private ApplicationListener listener;
 	private DrawableElements elements;
 	
@@ -37,19 +27,15 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	private final JMenuItem saveMenu = new JMenuItem();
 	private final JMenuItem saveAsMenu = new JMenuItem();
 	private final JMenuItem quitMenu = new JMenuItem();
-	
-	
+		
 	/*   MENU AND SUB MENU EDIT */
 	private final JMenu     EditMenu = new JMenu();
 	private final JMenuItem undoMenu = new JMenuItem();
 	private final JMenuItem redoMenu = new JMenuItem();
-	
-	
-	
-	
+			
 	/*   MENU AND SUB MENU IMAGES*/
 	private final JMenu imageMenu = new JMenu();
-		private final JMenuItem importMenu = new JMenuItem();
+	private final JMenuItem importMenu = new JMenuItem();
 	private final JMenuItem exportMenu = new JMenuItem();	
 	private final JMenuItem  filterMenu = new JMenuItem();
 	private final JMenuItem  tintMenu = new JMenuItem();
@@ -116,6 +102,8 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 		jTabbedPane.add("Sans titre",cavenas);	
 		getContentPane().add(jTabbedPane);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		//ss
+		setAlwaysOnTop(true);//permet de garder la fenêtre sur le dessus
 		try {
 			createMenu();
 		} catch (Throwable e) {
