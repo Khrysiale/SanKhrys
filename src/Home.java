@@ -117,7 +117,9 @@ public class Home extends JFrame implements ActionListener{
 		jTabbedPane.add("Sans titre",drawPanel); 
 		     
 		size = getSize();
-		getContentPane().add(drawPanel);
+		getContentPane().add(drawPanel);// ajouter panneau dessin a la fenêtre
+		// et associe avec objet de Drawable
+		//zone affichage des images
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				
 		try {
@@ -125,6 +127,8 @@ public class Home extends JFrame implements ActionListener{
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		
+	
 		
 	}
 
@@ -336,21 +340,21 @@ public class Home extends JFrame implements ActionListener{
 		}else if(e.getSource().equals(importMenu )){
 			//listener.onImport();
 			
-			JFileChooser fileOpenImage = new JFileChooser();
-			fileOpenImage.setAcceptAllFileFilterUsed(false);
+			JFileChooser chooser = new JFileChooser();
+			chooser.setAcceptAllFileFilterUsed(false);
 			String ext [] = {"bmp","jpg","jpeg","png"};
 			FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
-			fileOpenImage.addChoosableFileFilter(imgFilter);
-			
-			if(fileOpenImage.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
-				File[] files = fileOpenImage.getSelectedFiles();
+			chooser.addChoosableFileFilter(imgFilter);
+			/*********************************************************************************************************/
+			if(chooser.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
+				//File[] files = fileOpenImage.getSelectedFiles().getAbsolutePath();
+				File[] file = chooser.getSelectedFiles();
+				//drawPanel.importImage(file);
+
+	                        
 			}
 			
-	        /*if (fileOpenImage.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-	               panel = new MyImage();
-	               panel.importImage(new File(fileOpenImage.getSelectedFile()
-	                         .getAbsolutePath()));
-	        }   */     	
+	          	
 			
 			
 		}else if(e.getSource().equals(exportMenu)){
@@ -402,6 +406,8 @@ public class Home extends JFrame implements ActionListener{
 		}
 		
 	}
+	
+	
 	
 	
 	private void onNewFileMenu() {

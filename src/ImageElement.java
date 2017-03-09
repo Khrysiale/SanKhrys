@@ -6,10 +6,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-public class ImageElement {
+/* classe permettant de modifier une image chargee
+ */
+public class ImageElement extends JPanel{
 	
-	BufferedImage image;;
+	public BufferedImage bImg = null; //image chargee dans le panneau
 	long id;
 		
 	
