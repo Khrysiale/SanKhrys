@@ -43,9 +43,15 @@ public class Elements implements DrawableElements{
 	}
 
 	@Override
-	public long getId() {
+	public long getIdCurrentElement() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Elements[] getElement() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

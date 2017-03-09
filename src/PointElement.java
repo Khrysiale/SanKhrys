@@ -68,11 +68,6 @@ public class PointElement implements DrawableElements{
 	public void setId(long id){
 		this.id = id;
 	}
-
-	@Override
-	public long getId() {
-		return this.id;
-	}
 	
 	public void setX(double x){
 		this.x = x;
@@ -88,6 +83,17 @@ public class PointElement implements DrawableElements{
 	
 	public double getY(){
 		return y;
+	}
+
+	@Override
+	public long getIdCurrentElement() {
+		return this.id;
+	}
+
+	@Override
+	public Elements[] getElement() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

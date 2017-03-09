@@ -11,11 +11,13 @@ public class Controller implements ApplicationListener{
 	private int selectedIdIndex;
 	private static ArrayList<byte[]> maByteArray = new ArrayList<byte[]>();
 	private static int current;
+	private static Canevas canevas;
 	
 	public Controller (Accueil ui){
 		Controller.ui = ui;
 		Controller.ui.addListener(this);
-		this.manager = new ElementManager();
+		canevas = ui.getCanevas();
+		this.manager = new ElementManager(canevas);
 		this.selectedId = -1;
 		this.selectedIdIndex = -1;
 		

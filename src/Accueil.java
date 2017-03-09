@@ -26,7 +26,7 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 
 
 	private ApplicationListener listener;
-	private DrawableElements elements;
+	//private DrawableElements elements;
 	
 	private final JMenuBar menuBar = new JMenuBar();
 	
@@ -398,6 +398,11 @@ public class Accueil extends JFrame implements ActionListener, CavenasListener {
 	public void addListener(ApplicationListener listener){
 		this.listener = listener;
 		this.listener.onInit();
+	}
+
+	public Canevas getCanevas() {
+		return this.cavenas;
+		
 	}
 	
 	

@@ -10,11 +10,13 @@ public class ImageElement implements DrawableElements{
 	
 	BufferedImage image;
 	Canevas canevas;
+	long id;
 		
 	
-	public ImageElement(){
+	public ImageElement(long id){
 		
 		System.out.println("Dans ImageElement ok");
+		this.id = id;
 		JFileChooser fileOpenImage = new JFileChooser();
 		fileOpenImage.setAcceptAllFileFilterUsed(false);
 		String ext [] = {"bmp","jpg","jpeg","png"};
@@ -63,11 +65,18 @@ public class ImageElement implements DrawableElements{
 	}
 
 	@Override
-	public long getId() {
+	public long getIdCurrentElement() {
 		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
-		
+
+	@Override
+	public Elements[] getElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 		
 		
         

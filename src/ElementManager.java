@@ -11,12 +11,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class ElementManager implements DrawableElements{
 	
 	private List<DrawableElements> elements ;
-	private long idCurrentPoint;
+	private long idCurrentElement;
 	private CavenasListener listener;
 	private Canevas canevas;
-	public ElementManager(){
+	public ElementManager(Canevas canevas){
 		this.elements = new ArrayList<>();
 		this.listener = listener;
+		this.canevas = canevas;
 	}
 	
 	/**
@@ -49,17 +50,17 @@ public class ElementManager implements DrawableElements{
 	
 
 
-	public long getIdCurrentPoint() { 
-		idCurrentPoint++; 
-		return idCurrentPoint; 
+	public long getIdCurrentElement() { 
+		idCurrentElement++; 
+		return idCurrentElement; 
 	} 
 	
-	public void incrementIdCurrentPoint() { 
-        idCurrentPoint++; 
+	public void incrementIdCurrentElement() { 
+        idCurrentElement++; 
     } 
 	
-	public void setIdCurrentPoint(long idCurrentPoint) { 
-        this.idCurrentPoint = idCurrentPoint; 
+	public void setIdCurrentElement(long idCurrentElement) { 
+        this.idCurrentElement = idCurrentElement; 
     } 
 
 	/**
@@ -67,7 +68,7 @@ public class ElementManager implements DrawableElements{
 	 * 
 	 */
 	public void updateID(){
-		this.idCurrentPoint = 1; 
+		this.idCurrentElement = 1; 
 
 		for (int i = 0; i < this.elements.size(); i++) { 
 
@@ -75,15 +76,15 @@ public class ElementManager implements DrawableElements{
 
 			if (elem instanceof DrawableElements) { 
 
-				PointElement[] pts = elem.getPoints(); 
+				Elements[] pts = elem.getElement();
 
 				if (pts != null) { 
 
 					for (int j = 0; j < pts.length; j++) { 
-						long id = pts[j].getId(); 
+						long id = pts[j].getIdCurrentElement(); 
 
-						if (id > this.idCurrentPoint) { 
-							idCurrentPoint = id; 
+						if (id > this.idCurrentElement) { 
+							idCurrentElement = id; 
 						} 
 					} 
 				} 
@@ -137,7 +138,7 @@ public class ElementManager implements DrawableElements{
 
 	public void importImagesElement() {
 		System.out.println("Dans ElementManager ok");
-		ImageElement img = new ImageElement();
+		ImageElement img = new ImageElement(this.getIdCurrentElement());
 		elements.add(img);
 		
 	}
@@ -167,11 +168,10 @@ public class ElementManager implements DrawableElements{
 	}
 
 	@Override
-	public long getId() {
+	public Elements[] getElement() {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
-
 	
 
 }
