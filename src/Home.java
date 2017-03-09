@@ -40,7 +40,6 @@ public class Home extends JFrame implements ActionListener{
 	
 	Dimension size ;
 	
-
 	
 	private final JMenuBar menuBar = new JMenuBar();
 	
@@ -409,8 +408,7 @@ public class Home extends JFrame implements ActionListener{
 			img.importImage(file);
 			object.add(img);
 			drawPanel.repaint();		
-                        
-		}		
+       	}		
 	}
 
 	public void askSave() {
@@ -629,7 +627,9 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onFilter() {
-		// TODO Auto-generated method stub
+		img.filterImage();
+		object.add(img);
+		drawPanel.repaint();
 		
 	}
 
