@@ -1,32 +1,10 @@
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
-
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-public class ImageElement implements DrawableElements{
+public class Elements implements DrawableElements{
 	
-	BufferedImage image;
-	Canevas canevas;
-	long id;
-		
-	
-	public ImageElement(long id){
-		
-		System.out.println("Dans ImageElement ok");
-		this.id = id;
-		JFileChooser fileOpenImage = new JFileChooser();
-		fileOpenImage.setAcceptAllFileFilterUsed(false);
-		String ext [] = {"bmp","jpg","jpeg","png"};
-		FileFilter imgFilter = new FileNameExtensionFilter("bmp, gif, jpg, jpeg, png",ext);
-		fileOpenImage.addChoosableFileFilter(imgFilter);
-		
-		if(fileOpenImage.showOpenDialog(canevas)== JFileChooser.APPROVE_OPTION){
-			
-		}
-	}
+	private List<DrawableElements> elements = new ArrayList<>();
 
 	@Override
 	public double[] getTab() {
@@ -67,7 +45,7 @@ public class ImageElement implements DrawableElements{
 	@Override
 	public long getIdCurrentElement() {
 		// TODO Auto-generated method stub
-		return id;
+		return 0;
 	}
 
 	@Override
@@ -75,12 +53,7 @@ public class ImageElement implements DrawableElements{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
-	
-		
-		
-        
-	
 }
-
-

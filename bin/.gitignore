@@ -6,7 +6,9 @@
 /Controller.class
 /DrawableElements.class
 /ElementManager.class
-/Image.class
+/Elements.class
 /ImageElement.class
+/MyImage.class
 /PanelImage.class
+/PointElement.class
 /main.class

@@ -1,17 +1,23 @@
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ElementManager {
+
+public class ElementManager implements DrawableElements{
 	
 	private List<DrawableElements> elements ;
-	private long idCurrentPoint;
+	private long idCurrentElement;
 	private CavenasListener listener;
-	
-	public ElementManager(){
+	private Canevas canevas;
+	public ElementManager(Canevas canevas){
 		this.elements = new ArrayList<>();
 		this.listener = listener;
+		this.canevas = canevas;
 	}
 	
 	/**
@@ -29,6 +35,7 @@ public class ElementManager {
 	 * 
 	 */
 	public void addElement(DrawableElements elem){
+		
 		this.elements.add(elem);
 	}
 	
@@ -41,19 +48,51 @@ public class ElementManager {
 		this.elements.remove(elem);
 	}
 	
+
+
+	public long getIdCurrentElement() { 
+		idCurrentElement++; 
+		return idCurrentElement; 
+	} 
+	
+	public void incrementIdCurrentElement() { 
+        idCurrentElement++; 
+    } 
+	
+	public void setIdCurrentElement(long idCurrentElement) { 
+        this.idCurrentElement = idCurrentElement; 
+    } 
+
 	/**
 	 * Mise à jour des id des éléments contenu dans la scene
 	 * 
 	 */
 	public void updateID(){
-		this.idCurrentPoint = 1;
-		
-		for(int i = 0; i < this.elements.size(); i++){
-			DrawableElements elem = this.elements.get(i);
-		}
+		this.idCurrentElement = 1; 
+
+		for (int i = 0; i < this.elements.size(); i++) { 
+
+			DrawableElements elem = this.elements.get(i); 
+
+			if (elem instanceof DrawableElements) { 
+
+				Elements[] pts = elem.getElement();
+
+				if (pts != null) { 
+
+					for (int j = 0; j < pts.length; j++) { 
+						long id = pts[j].getIdCurrentElement(); 
+
+						if (id > this.idCurrentElement) { 
+							idCurrentElement = id; 
+						} 
+					} 
+				} 
+			} 
+		} 
 	}
-	
-	
+
+
 	/**
 	 * Renvoie les valeurs posXMin, posYmin, posXMax, posYMax sous la forme d'un tableau
 	 */
@@ -97,10 +136,42 @@ public class ElementManager {
 		}		
 	}
 
-	public void importImages() {
+	public void importImagesElement() {
 		System.out.println("Dans ElementManager ok");
-		ImageElement img = new ImageElement();
+		ImageElement img = new ImageElement(this.getIdCurrentElement());
+		elements.add(img);
 		
 	}
+
+	@Override
+	public void setVisible(boolean flag) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public PointElement[] getPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double[] tab() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Elements[] getElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }
