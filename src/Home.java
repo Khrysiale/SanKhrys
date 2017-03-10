@@ -668,20 +668,20 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 	}
 /**********************************************************************************************************************/
 	private void onFilter() {
-<<<<<<< HEAD
+
 		System.out.println("appel convolution");
 		MyImage img = new MyImage(getCurrentId());
 		img.getImagePanel();
 		img.filterImage();
 		object.add(img);
 		drawPanel.repaint();
-=======
+
 		/*
 		img.filterImage();
 		object.add(img);
 		drawPanel.repaint();
 		*/
->>>>>>> origin/master
+
 	}
 
 	private void onExport() {

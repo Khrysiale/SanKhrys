@@ -70,16 +70,16 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
+
 		System.out.println("image importee");		
-=======
+
 		/*int w = bImg.getWidth(null);
 		int h = bImg.getHeight(null);
 		BufferedImage bi = new
 		    BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.getGraphics();
 		g.drawImage(bImg, 0, 0, null);*/
->>>>>>> origin/master
+
 		repaint(); 
 	}
 	
@@ -90,12 +90,12 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 		int width  = this.getWidth();
 		int height = this.getHeight();
 		BufferedImage image = new BufferedImage(width, height,  BufferedImage.TYPE_INT_RGB);
-<<<<<<< HEAD
+
 		Graphics2D g = image.createGraphics();//getGraphics
-=======
+
 		Graphics2D g = image.createGraphics();
 
->>>>>>> origin/master
+
 		this.paintAll(g);
 		g.dispose();
 		return image;
@@ -140,7 +140,7 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 
 		Kernel mask = new Kernel(3, 3, maskBlurry);
 		ConvolveOp operation = new ConvolveOp(mask);
-<<<<<<< HEAD
+
 		operation.filter(bufferImg, imgBlurry);
 		bufferImg = imgBlurry;
 		
