@@ -2,6 +2,7 @@
 
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -670,17 +672,16 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 	private void onFilter() {
 
 		System.out.println("appel convolution");
-		MyImage img = new MyImage(getCurrentId());
-		img.getImagePanel();
-		img.filterImage();
-		object.add(img);
+		//MyImage img = new MyImage(getCurrentId());
+		int x = 0;
+		int y = 0;
+		
+		Component img = getComponentAt(x,y);
+		//MyImage image = img;
+		BufferedImage bImg = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);;		 
+		//bImg.filterImage();
+		//object.add(img);
 		drawPanel.repaint();
-
-		/*
-		img.filterImage();
-		object.add(img);
-		drawPanel.repaint();
-		*/
 
 	}
 

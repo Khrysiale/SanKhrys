@@ -11,12 +11,15 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -108,19 +111,19 @@ public class MyImage extends JPanel implements Drawable {
 	//rend une image flou 
 	protected void filterImage()
 	{
-		BufferedImage imgBlurry = new BufferedImage(imgWidth, imgHeight, bImg.getType());
-		float[ ] maskBlurry = 
+		BufferedImageOp  bImgDest = (BufferedImageOp) new BufferedImage(imgWidth, imgHeight, bImg.getType());
+		bImgDest.filter(bImg, (BufferedImage) bImgDest);
+		float[ ] flou = 
 		{
 				0.1f, 0.1f, 0.1f,
 				0.1f, 0.2f, 0.1f,
 				0.1f, 0.1f, 0.1f
 		};
 
-		Kernel mask = new Kernel(3, 3, maskBlurry);
-		ConvolveOp operation = new ConvolveOp(mask);
-
-		operation.filter(bImg, imgBlurry);
-		bImg = imgBlurry;
+		Kernel kernel = new Kernel(3, 3, flou);
+		ConvolveOp cOp = new ConvolveOp(kernel, ConvolveOp.EDGE_ZERO_FILL, null);
+		cOp.filter(bImg, (BufferedImage) bImgDest);
+		//bImg = operation;
 		
 		System.out.println("filtrage fait");
 		repaint();
@@ -168,7 +171,8 @@ public class MyImage extends JPanel implements Drawable {
 		String format ="png";
 		BufferedImage imgDest = getImagePanel();
 		try {
-			ImageIO.write(imgDest, format, imgFile);
+			if(!ImageIO.write(imgDest, format, imgFile));
+				JOptionPane.showMessageDialog(null, "Ecriture impossible : "+format);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
