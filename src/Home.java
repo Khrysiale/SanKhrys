@@ -625,12 +625,14 @@ public class Home extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
-
+/**********************************************************************************************************************/
 	private void onFilter() {
+		System.out.println("appel convolution");
+		MyImage img = new MyImage(getCurrentId());
+		img.getImagePanel();
 		img.filterImage();
 		object.add(img);
 		drawPanel.repaint();
-		
 	}
 
 	private void onExport() {

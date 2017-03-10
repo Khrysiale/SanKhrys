@@ -66,7 +66,7 @@ public class MyImage extends JPanel implements Drawable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-				
+		System.out.println("image importee");		
 		repaint(); 
 	}
 	
@@ -77,7 +77,7 @@ public class MyImage extends JPanel implements Drawable {
 		int width  = this.getWidth();
 		int height = this.getHeight();
 		BufferedImage image = new BufferedImage(width, height,  BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = image.createGraphics();
+		Graphics2D g = image.createGraphics();//getGraphics
 		this.paintAll(g);
 		g.dispose();
 		
@@ -100,14 +100,36 @@ public class MyImage extends JPanel implements Drawable {
 		ConvolveOp operation = new ConvolveOp(mask);
 		operation.filter(bufferImg, imgBlurry);
 		bufferImg = imgBlurry;
-		//System.out.println("convolution effectuee");
+		
+		System.out.println("filtrage fait");
 		repaint();
 	}
 
-
-
+	//convertie image en vert
+	protected void tintGreenImage()
+	{
+		int width = bufferImg.getWidth();
+		int height = bufferImg.getHeight();
+		
+		BufferedImage imgGreen = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		
+		for(int y = 0; y < height; y++){
+			for(int x = 0; x < width; x++){
+				int p = imgGreen.getRGB(x, y);
+				int a = (p >> 24)&0xff;
+				int g = (p >>8)&0xff;
+				
+				//nouvelle couleur
+				p = (a<<24) | (0<<16) | (g<<8) | 0;
+				
+				imgGreen.setRGB(x,  y,  p);
+			}
+		}
+		
+		repaint();
+	}
 	
-
+	
 	//enregistre image modifiee sur disque
 	protected void exportImage(File imgFile)
 	{
@@ -146,16 +168,6 @@ public class MyImage extends JPanel implements Drawable {
 	
 }*/
  
-	/*protected void imageEnNiveauGris()
-	{
-		BufferedImage imageGris = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_USHORT_GRAY);
-		Graphics2D surfaceimgSrc = imageGris.createGraphics();
-		surfaceimgSrc.drawImage(imgSrc, null, null);	      
-		imgSrc = imageGris;
-		repaint(); 
-	}*/
-
-	
 	
 	/*protected void agrandirImage()
 	{
