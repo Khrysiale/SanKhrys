@@ -253,7 +253,7 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		pointMenu.setText("Point");
 		drawing2DMenu.add(lineMenu);
 		lineMenu.addActionListener(this);
-		lineMenu.setText("Ligne");
+		lineMenu.setText("Line");
 		drawing2DMenu.add(rectangleMenu);
 		rectangleMenu.addActionListener(this);
 		rectangleMenu.setText("Rectangle");
@@ -636,7 +636,9 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 	}
 
 	private void onLine() {
-		// TODO Auto-generated method stub
+		Line line = new Line(getCurrentId());
+		object.add(line);
+		drawPanel.repaint();
 		
 	}
 
