@@ -9,6 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public class PointElement  extends Point2D.Double implements Drawable, java.io.Serializable{
@@ -41,6 +42,13 @@ public class PointElement  extends Point2D.Double implements Drawable, java.io.S
 		g.setColor(Color.BLACK);
 		((Graphics2D) g).setStroke(new BasicStroke(2.0f));
 		g.drawLine((int)this.x,(int)this.y,(int)this.x,(int)this.y);
+		
+	}
+
+
+	@Override
+	public void setPosition(Point p) {
+		// TODO Auto-generated method stub
 		
 	}
 

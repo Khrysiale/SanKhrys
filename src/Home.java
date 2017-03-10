@@ -8,10 +8,17 @@ import java.awt.Graphics2D;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
@@ -29,9 +36,12 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
-public class Home extends JFrame implements ActionListener{
+public class Home extends JFrame implements ActionListener,MouseWheelListener, MouseListener, MouseMotionListener, MouseAdapter{
 	
 	private static final long serialVersionUID = 4648688787386404371L;
+	
+	
+	
 	public static Home ui;
 	
 	private ActionListener listener;
@@ -40,6 +50,9 @@ public class Home extends JFrame implements ActionListener{
 	
 	Dimension size ;
 	
+
+	private static ArrayList<byte[]> maByteArray = new ArrayList<byte[]>();
+
 	
 	private final JMenuBar menuBar = new JMenuBar();
 	
@@ -108,11 +121,11 @@ public class Home extends JFrame implements ActionListener{
 	private final JMenuItem orthogonalMenu = new JMenuItem();
 
 	private JPanel jTabbedPane = null;
-	private MyImage image = null;
+	
 	
 	MyDrawing drawPanel = new MyDrawing();
 	
-
+	
 	/*    Constructor of Home class   */
 	public Home() {
 		super();
@@ -120,7 +133,7 @@ public class Home extends JFrame implements ActionListener{
 		setTitle("SanKhrys application graphic ");
 		jTabbedPane=new JPanel();
 		jTabbedPane.add("Sans titre",drawPanel); 
-		     
+		jTabbedPane.addMouseListener(this);    
 		size = getSize();
 		getContentPane().add(drawPanel);// ajouter panneau dessin a la fenêtre
 		// et associe avec objet de Drawable
@@ -131,10 +144,7 @@ public class Home extends JFrame implements ActionListener{
 			createMenu();
 		} catch (Throwable e) {
 			e.printStackTrace();
-		}
-		
-	
-		
+		}		
 	}
 
 	private void createMenu() throws Exception {
@@ -142,8 +152,7 @@ public class Home extends JFrame implements ActionListener{
 		createFileMenu();
 		createEditMenu();
 		createImageMenu();
-		createFormMenu();
-		
+		createFormMenu();		
 		createToolsMenu();
 		createCameraMenu();
 		createHelpMenu();
@@ -244,7 +253,7 @@ public class Home extends JFrame implements ActionListener{
 		pointMenu.setText("Point");
 		drawing2DMenu.add(lineMenu);
 		lineMenu.addActionListener(this);
-		lineMenu.setText("Ligne");
+		lineMenu.setText("Line");
 		drawing2DMenu.add(rectangleMenu);
 		rectangleMenu.addActionListener(this);
 		rectangleMenu.setText("Rectangle");
@@ -394,6 +403,18 @@ public class Home extends JFrame implements ActionListener{
 		}
 		
 	}
+	
+
+	
+	private void onOpenMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * Fonction d'importation d'une image
+	 * l'image est ensuite placé dans le tableau d'object qui sera rendu dans la zone de travail
+	 */
 	private void onImport() {
 		JFileChooser chooser = new JFileChooser();
 		chooser.setAcceptAllFileFilterUsed(false);
@@ -411,6 +432,10 @@ public class Home extends JFrame implements ActionListener{
        	}		
 	}
 
+	/**
+	 * Fonction qui demande si l'utilisateur veut sauvegarder avant de quitter. Fait appel à la fonction showChoiceDialog
+	 * Si la réponse est non, on quitte simplement le programme
+	 */
 	public void askSave() {
 		int answer = showChoiceDialog("Voulez-vous sauvegarder?", "oui","non");
 		if( answer == 0){
@@ -418,6 +443,8 @@ public class Home extends JFrame implements ActionListener{
 		}	
 		System.exit(0);
 	}
+	
+	
 	
 	public int showChoiceDialog(String text, String choice1, String choice2){
 		Object[] options = {choice1,choice2};
@@ -432,7 +459,7 @@ public class Home extends JFrame implements ActionListener{
 		 int dialogButton = JOptionPane.OK_OPTION;
         JOptionPane.showMessageDialog (null, text,"Information",0);
 
-        if(dialogButton == JOptionPane.OK_OPTION){ //The ISSUE is here
+        if(dialogButton == JOptionPane.OK_OPTION){ 
         }
 	}
 	
@@ -442,8 +469,11 @@ public class Home extends JFrame implements ActionListener{
 		
 	}
 
-	private void onOpenMenu() {
-		// TODO Auto-generated method stub
+
+	private void clearAll() {
+		this.object= new ArrayList<Drawable>();
+		this.id = 0;
+		drawPanel.repaint();
 		
 	}
 
@@ -453,9 +483,16 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onQuitMenu() {
-		// TODO Auto-generated method stub
+		askSave();
 		
 	}
+	
+	
+	/***
+	 * Fonction lorsque l'utilisateur clique sur Enregistrer sous
+	 * Enregistre sur le disque dur la zone de dessin tel quel pour une reprise du travail plus tard
+	 * 
+	 */
 
 	private void onSaveAsMenu() {
 		String PathToSave = null;
@@ -465,8 +502,7 @@ public class Home extends JFrame implements ActionListener{
 		int response = fc.showSaveDialog(null);
 		if(response == JFileChooser.APPROVE_OPTION){
 			PathToSave = fc.getSelectedFile().toString();
-			if (!PathToSave.isEmpty())
-			{
+			if (!PathToSave.isEmpty()){
 				onSaveAs(PathToSave);
 			}
 		}
@@ -494,6 +530,7 @@ public class Home extends JFrame implements ActionListener{
 		}
 		
 	}
+	
 
 	private  static void performSerialization(JPanel jTabbedPane2, String pathToSave) throws IOException {
 		FileOutputStream fos=new FileOutputStream(new File(pathToSave+".ser")) ;
@@ -599,12 +636,16 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onLine() {
-		// TODO Auto-generated method stub
+		Line line = new Line(getCurrentId());
+		object.add(line);
+		drawPanel.repaint();
 		
 	}
 
 	private void onRectangle() {
-		// TODO Auto-generated method stub
+		Rectangle rect = new Rectangle(getCurrentId());
+		object.add(rect);
+		drawPanel.repaint();
 		
 	}
 
@@ -627,12 +668,20 @@ public class Home extends JFrame implements ActionListener{
 	}
 /**********************************************************************************************************************/
 	private void onFilter() {
+<<<<<<< HEAD
 		System.out.println("appel convolution");
 		MyImage img = new MyImage(getCurrentId());
 		img.getImagePanel();
 		img.filterImage();
 		object.add(img);
 		drawPanel.repaint();
+=======
+		/*
+		img.filterImage();
+		object.add(img);
+		drawPanel.repaint();
+		*/
+>>>>>>> origin/master
 	}
 
 	private void onExport() {
@@ -671,6 +720,54 @@ public class Home extends JFrame implements ActionListener{
 	}
 	public void paintComponent(Graphics g) {
 		Graphics2D graphics2d = (Graphics2D)g;
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		System.out.println(e.getX());
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
