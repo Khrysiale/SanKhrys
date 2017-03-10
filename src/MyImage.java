@@ -93,9 +93,6 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 
 		Graphics2D g = image.createGraphics();//getGraphics
 
-		Graphics2D g = image.createGraphics();
-
-
 		this.paintAll(g);
 		g.dispose();
 		return image;
@@ -141,8 +138,8 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 		Kernel mask = new Kernel(3, 3, maskBlurry);
 		ConvolveOp operation = new ConvolveOp(mask);
 
-		operation.filter(bufferImg, imgBlurry);
-		bufferImg = imgBlurry;
+		operation.filter(bImg, imgBlurry);
+		bImg = imgBlurry;
 		
 		System.out.println("filtrage fait");
 		repaint();
@@ -151,8 +148,8 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	//convertie image en vert
 	protected void tintGreenImage()
 	{
-		int width = bufferImg.getWidth();
-		int height = bufferImg.getHeight();
+		int width = bImg.getWidth();
+		int height = bImg.getHeight();
 		
 		BufferedImage imgGreen = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		
@@ -172,17 +169,6 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 		repaint();
 	}
 	
-	
-	//enregistre image modifiee sur disque
-	protected void exportImage(File imgFile)
-=======
-		operation.filter(bImg, imgBlurry);
-		bImg = imgBlurry;
-		//System.out.println("convolution effectuee");
-		repaint();
-	}
-
-
 
 	/*protected void imageEnNiveauGris()
 	{
@@ -194,9 +180,9 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	}*/
 
 	
-
+	//enregistre image modifiee sur disque
 	protected void exportImage(File imgFile)//protected void enregistrerImage(File fichierImage)
->>>>>>> origin/master
+
 	{
 		String format ="png";
 		BufferedImage image = getImagePanel();
@@ -215,12 +201,7 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	}
 
 	
-	
-<<<<<<< HEAD
-}*/
- 
-	
-=======
+
 	
 	
 	/*protected void reduireImage()
@@ -235,7 +216,7 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	}*/
 
 
->>>>>>> origin/master
+
 	/*protected void agrandirImage()
 	{
 		BufferedImage imageZoomer = new BufferedImage((int)(imgSrc.getWidth()*1.5),(int)( imgSrc.getHeight()*1.5), imgSrc.getType());
