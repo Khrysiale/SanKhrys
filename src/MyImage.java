@@ -8,6 +8,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
@@ -15,6 +16,7 @@ import java.awt.image.Kernel;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -23,34 +25,21 @@ import javax.swing.JPanel;
  * param[in] pImage image choisi
  * param[in] pFile le nom du fichier image
  */
-public class MyImage extends JPanel implements Drawable { //public class Image implements Drawable {
+public class MyImage extends JPanel implements Drawable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8871673203084539139L;
-	//public Image image = null;//ok
-	//public File imageSrc;//
-	public BufferedImage bImg = null;
-	public String imgName; //add
-	private long id;
-
-	//constructor1
-	public MyImage(long id){//public MyImage(Image pimage, String pimgName) {
-		//image = pimage;//new
-       // imgName = pimgName;
-        //fileName = pFile;//new
-        super();
+	private BufferedImage bImg = null;
+	private String imgName = "";
+	private long id = 0;
+	private int imgWidth = 0;
+	private int imgHeight = 0;
+	
+	//constructor
+	public MyImage(long id){
+		super();
         setBounds(100,100,200,200);
         this.id = id;
 	}
-	
-	//constructor2
-		//public MyImage(String pfileName) {
-			//this.image = getToolkit().getImage(pfileName);//new
-	        //fileName = pFile;//new
-	        //super();
-		//}
 	
 	@Override
 	public void draw(Graphics g) {
@@ -61,45 +50,39 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 		}
 	}
 
-		
-	protected void importImage(File imgFile)	//protected void ajouterImage(File imgFile)
-	{   // importe une image	
+	protected void importImage(File imgFile)	
+	{   // importe image dans le buffer	
 		try {
 			imgName = imgFile.getName();
 			bImg = ImageIO.read(imgFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		System.out.println("image importee");		
 
-		/*int w = bImg.getWidth(null);
-		int h = bImg.getHeight(null);
+		imgWidth = bImg.getWidth();
+		imgHeight = bImg.getHeight();
+		
 		BufferedImage bi = new
-		    BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		    BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_RGB);
 		Graphics g = bi.getGraphics();
-		g.drawImage(bImg, 0, 0, null);*/
+		g.drawImage(bImg, 0, 0, null);
 
 		repaint(); 
 	}
 	
-	
-	
 	protected BufferedImage getImagePanel()
 	{   // recupere image affichee
-		int width  = this.getWidth();
-		int height = this.getHeight();
-		BufferedImage image = new BufferedImage(width, height,  BufferedImage.TYPE_INT_RGB);
-
-		Graphics2D g = image.createGraphics();//getGraphics
-
-		this.paintAll(g);
-		g.dispose();
+				
+		BufferedImage image = new BufferedImage(imgWidth, imgHeight,  BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2D = image.createGraphics();
+		//on demande au panel de se dessiner sur les graphics de l'image
+		this.paintAll(g2D);
+		g2D.dispose();
 		return image;
 	}
 	
-	
-	protected void colorSpace(){
+	/*protected void colorSpace(){
 		int red = 255;
 		int blue = 0;
 		int green = 0;
@@ -119,15 +102,13 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 		//if(rgbColor.equals(hsbColor))
 		  //System.out.println("Les couleurs sont les m�mes");
 		
-	}
+	}*/
 	 
-
-	
 
 	//rend une image flou 
 	protected void filterImage()
 	{
-		BufferedImage imgBlurry = new BufferedImage(bImg.getWidth(),bImg.getHeight(), bImg.getType());
+		BufferedImage imgBlurry = new BufferedImage(imgWidth, imgHeight, bImg.getType());
 		float[ ] maskBlurry = 
 		{
 				0.1f, 0.1f, 0.1f,
@@ -185,9 +166,9 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 
 	{
 		String format ="png";
-		BufferedImage image = getImagePanel();
+		BufferedImage imgDest = getImagePanel();
 		try {
-			ImageIO.write(image, format, imgFile);
+			ImageIO.write(imgDest, format, imgFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

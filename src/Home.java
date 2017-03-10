@@ -49,7 +49,7 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 	private long id = 0;
 	
 	Dimension size ;
-	
+	//private MyImage img;
 
 	private static ArrayList<byte[]> maByteArray = new ArrayList<byte[]>();
 
@@ -425,7 +425,7 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		if(chooser.showOpenDialog(this)== JFileChooser.APPROVE_OPTION){
 			//File[] files = fileOpenImage.getSelectedFiles().getAbsolutePath();
 			File file = chooser.getSelectedFile();
-			MyImage img= new MyImage(getCurrentId());
+			MyImage img = new MyImage(getCurrentId());
 			img.importImage(file);
 			object.add(img);
 			drawPanel.repaint();		
