@@ -680,7 +680,7 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 	private void onFilter() {
 
 		System.out.println("appel convolution");
-		//MyImage img = new MyImage(getCurrentId());
+		jTabbedPane.getComponents();//MyImage img = new MyImage(getCurrentId());
 		int x = 0;
 		int y = 0;
 		

@@ -185,41 +185,4 @@ public class MyImage extends JPanel implements Drawable {
 		
 	}
 
-	
-
-	
-	
-	/*protected void reduireImage()
-	{
-		BufferedImage imageReduite = new BufferedImage((int)(imgSrc.getWidth()*0.5),(int)( imgSrc.getHeight()*0.5), imgSrc.getType());
-		AffineTransform reduire = AffineTransform.getScaleInstance(0.5, 0.5);
-		int interpolation = AffineTransformOp.TYPE_BICUBIC;
-		AffineTransformOp retaillerImage = new AffineTransformOp(reduire, interpolation);
-		retaillerImage.filter(imgSrc, imageReduite );
-		imgSrc = imageReduite ;
-		repaint();
-	}*/
-
-
-
-	/*protected void agrandirImage()
-	{
-		BufferedImage imageZoomer = new BufferedImage((int)(imgSrc.getWidth()*1.5),(int)( imgSrc.getHeight()*1.5), imgSrc.getType());
-		AffineTransform agrandir = AffineTransform.getScaleInstance(1.5, 1.5);
-		int interpolation = AffineTransformOp.TYPE_BICUBIC;
-		AffineTransformOp retaillerImage = new AffineTransformOp(agrandir, interpolation);
-		retaillerImage.filter(imgSrc, imageZoomer );
-		imgSrc = imageZoomer ;
-		repaint();
-	}*/
-	
-	/*protected void imageEnNiveauGris()
-	{
-		BufferedImage imageGris = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), BufferedImage.TYPE_USHORT_GRAY);
-		Graphics2D surfaceimgSrc = imageGris.createGraphics();
-		surfaceimgSrc.drawImage(imgSrc, null, null);	      
-		imgSrc = imageGris;
-		repaint(); 
-	}*/
-	
 }
