@@ -108,19 +108,20 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 	private final JMenuItem noStroke =new JMenuItem();
 	private final JMenuItem fillMenu = new JMenuItem();
 	
-
-	/*        MENU AND SUB MENU HELP*/
-	private final JMenu helpMenu = new JMenu();
-	private final JMenuItem aboutMenu = new JMenuItem();
-		
-	
-	
 	/*        MENU CAMERA */
 	private final JMenu cameraMenu = new JMenu();
 	private final JMenuItem propertyMenu = new JMenuItem();
 	private final JMenu modeProjectionMenu = new JMenu();
 	private final JMenuItem perspectiveMenu = new JMenuItem();
 	private final JMenuItem orthogonalMenu = new JMenuItem();
+	
+	/*        MENU AND SUB MENU HELP*/
+	private final JMenu helpMenu = new JMenu();
+	private final JMenuItem aboutMenu = new JMenuItem();
+		
+	
+	
+	
 
 	private JPanel jTabbedPane = null;
 	
@@ -161,19 +162,7 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		
 	}
 
-	private void createCameraMenu() {
-		
-		menuBar.add(cameraMenu);
-		cameraMenu.add(modeProjectionMenu);
-		modeProjectionMenu.add(perspectiveMenu);
-		modeProjectionMenu.add(orthogonalMenu);
-		perspectiveMenu.setText("Perspective");
-		perspectiveMenu.addActionListener(this);
-		orthogonalMenu.setText("Orthogonale");
-		orthogonalMenu.addActionListener(this);
 	
-		
-	}
 
 	private void createFileMenu() {
 		// construction du menu
@@ -230,12 +219,11 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		exportMenu.setText("Exporter");
 		
 		imageMenu.addSeparator();
-
 		
 		imageMenu.add(filterMenu);
 		filterMenu.setText("Filtre");
 		filterMenu.addActionListener(this);
-		imageMenu.addSeparator();
+		//imageMenu.addSeparator();
 
 		imageMenu.add(tintMenu);
 		tintMenu.addActionListener(this);
@@ -309,7 +297,7 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		strokeMenu.add(strokeWeightMenu);
 		strokeWeightMenu.setText("Epaisseur");
 		
-		;
+		//;
 		strokeWeightMenu.add(oneStroke);
 		strokeWeightMenu.add(twoStroke);
 		strokeWeightMenu.add(treeStroke);
@@ -325,6 +313,26 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		treeStroke.setText("3");
 		fourStroke.setText("4");
 		noStroke.setText("Sans contour");
+
+	}
+	
+	private void createCameraMenu() {
+		
+		menuBar.add(cameraMenu);
+		cameraMenu.setText("Camera");
+		
+		cameraMenu.add(propertyMenu);
+		propertyMenu.setText("Proprietes");
+		
+		cameraMenu.add(modeProjectionMenu);
+		modeProjectionMenu.setText("Projection");
+		modeProjectionMenu.add(perspectiveMenu);
+		modeProjectionMenu.add(orthogonalMenu);
+		perspectiveMenu.setText("Perspective");
+		perspectiveMenu.addActionListener(this);
+		orthogonalMenu.setText("Orthogonale");
+		
+		orthogonalMenu.addActionListener(this);
 
 	}
 
@@ -677,8 +685,7 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		int y = 0;
 		
 		Component img = getComponentAt(x,y);
-		//MyImage image = img;
-		BufferedImage bImg = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);;		 
+		new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);;		 
 		//bImg.filterImage();
 		//object.add(img);
 		drawPanel.repaint();
@@ -720,7 +727,6 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		}
 	}
 	public void paintComponent(Graphics g) {
-		Graphics2D graphics2d = (Graphics2D)g;
 	}
 
 	@Override
