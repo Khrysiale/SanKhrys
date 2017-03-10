@@ -8,6 +8,11 @@ import java.awt.Graphics2D;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,9 +36,12 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
-public class Home extends JFrame implements ActionListener{
+public class Home extends JFrame implements ActionListener,MouseWheelListener, MouseListener, MouseMotionListener, MouseAdapter{
 	
 	private static final long serialVersionUID = 4648688787386404371L;
+	
+	
+	
 	public static Home ui;
 	
 	private ActionListener listener;
@@ -42,7 +50,9 @@ public class Home extends JFrame implements ActionListener{
 	
 	Dimension size ;
 	
+
 	private static ArrayList<byte[]> maByteArray = new ArrayList<byte[]>();
+
 	
 	private final JMenuBar menuBar = new JMenuBar();
 	
@@ -115,7 +125,7 @@ public class Home extends JFrame implements ActionListener{
 	
 	MyDrawing drawPanel = new MyDrawing();
 	
-
+	
 	/*    Constructor of Home class   */
 	public Home() {
 		super();
@@ -123,7 +133,7 @@ public class Home extends JFrame implements ActionListener{
 		setTitle("SanKhrys application graphic ");
 		jTabbedPane=new JPanel();
 		jTabbedPane.add("Sans titre",drawPanel); 
-		     
+		jTabbedPane.addMouseListener(this);    
 		size = getSize();
 		getContentPane().add(drawPanel);// ajouter panneau dessin a la fenêtre
 		// et associe avec objet de Drawable
@@ -134,10 +144,7 @@ public class Home extends JFrame implements ActionListener{
 			createMenu();
 		} catch (Throwable e) {
 			e.printStackTrace();
-		}
-		
-	
-		
+		}		
 	}
 
 	private void createMenu() throws Exception {
@@ -145,8 +152,7 @@ public class Home extends JFrame implements ActionListener{
 		createFileMenu();
 		createEditMenu();
 		createImageMenu();
-		createFormMenu();
-		
+		createFormMenu();		
 		createToolsMenu();
 		createCameraMenu();
 		createHelpMenu();
@@ -398,6 +404,8 @@ public class Home extends JFrame implements ActionListener{
 		
 	}
 	
+
+	
 	private void onOpenMenu() {
 		// TODO Auto-generated method stub
 		
@@ -421,8 +429,7 @@ public class Home extends JFrame implements ActionListener{
 			img.importImage(file);
 			object.add(img);
 			drawPanel.repaint();		
-                        
-		}		
+       	}		
 	}
 
 	/**
@@ -463,8 +470,6 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 
-	
-
 	private void clearAll() {
 		this.object= new ArrayList<Drawable>();
 		this.id = 0;
@@ -497,8 +502,7 @@ public class Home extends JFrame implements ActionListener{
 		int response = fc.showSaveDialog(null);
 		if(response == JFileChooser.APPROVE_OPTION){
 			PathToSave = fc.getSelectedFile().toString();
-			if (!PathToSave.isEmpty())
-			{
+			if (!PathToSave.isEmpty()){
 				onSaveAs(PathToSave);
 			}
 		}
@@ -637,7 +641,9 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onRectangle() {
-		// TODO Auto-generated method stub
+		Rectangle rect = new Rectangle(getCurrentId());
+		object.add(rect);
+		drawPanel.repaint();
 		
 	}
 
@@ -660,8 +666,11 @@ public class Home extends JFrame implements ActionListener{
 	}
 
 	private void onFilter() {
-		// TODO Auto-generated method stub
-		
+		/*
+		img.filterImage();
+		object.add(img);
+		drawPanel.repaint();
+		*/
 	}
 
 	private void onExport() {
@@ -700,6 +709,54 @@ public class Home extends JFrame implements ActionListener{
 	}
 	public void paintComponent(Graphics g) {
 		Graphics2D graphics2d = (Graphics2D)g;
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		System.out.println(e.getX());
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

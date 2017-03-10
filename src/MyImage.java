@@ -8,13 +8,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
-import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -55,14 +52,6 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	        //super();
 		//}
 	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	@Override
 	public void draw(Graphics g) {
 		 Graphics2D g2 = (Graphics2D) g;
@@ -161,14 +150,6 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 	}*/
 
 	
-			
-
-	
-
-
-	
-
-	
 
 	protected void exportImage(File imgFile)//protected void enregistrerImage(File fichierImage)
 	{
@@ -180,6 +161,12 @@ public class MyImage extends JPanel implements Drawable { //public class Image i
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void setPosition(Point p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
