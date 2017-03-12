@@ -38,7 +38,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
-public class Home extends JFrame implements ActionListener,MouseWheelListener, MouseListener, MouseMotionListener, MouseAdapter{
+public class Home extends JFrame implements ActionListener, MouseListener, MouseMotionListener{
 	
 	private static final long serialVersionUID = 4648688787386404371L;
 	
@@ -771,10 +771,10 @@ public class Home extends JFrame implements ActionListener,MouseWheelListener, M
 		
 	}
 
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
+	//@Override
+	/*public void mouseWheelMoved(MouseWheelEvent e) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 }

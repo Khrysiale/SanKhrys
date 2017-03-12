@@ -6,6 +6,7 @@
  */
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -36,6 +37,8 @@ public class MyImage extends JPanel implements Drawable {
 	private long id = 0;
 	private int imgWidth = 0;
 	private int imgHeight = 0;
+	private Point posDebut = null;
+	private Point posFin = null;
 	
 	//constructor
 	public MyImage(long id){
@@ -70,7 +73,6 @@ public class MyImage extends JPanel implements Drawable {
 		    BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_RGB);
 		Graphics g = bi.getGraphics();
 		g.drawImage(bImg, 0, 0, null);
-
 		repaint(); 
 	}
 	
